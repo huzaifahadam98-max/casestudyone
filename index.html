@@ -1,430 +1,386 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Case: Optimizing a Graduate Trainee Program</title>
+    <title>Huzaifah Adam - Human Capital Strategy</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* --- General Portfolio Styles --- */
         body {
             font-family: 'Inter', sans-serif;
+            background-color: #0d1117; /* A very dark blue, almost black */
+            color: #c9d1d9; /* Light gray for text */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-        .slide {
-            display: none;
-            min-height: 500px;
-        }
-        .slide.active {
-            display: flex;
-        }
-        /* Simple transition for fading in the active slide */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .slide.active {
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        /* Custom styles for charts */
-        .bar-chart-container {
-            display: flex;
-            justify-content: space-around;
-            height: 250px;
-            width: 100%;
-            padding: 0 1rem;
-        }
-        .bar-wrapper {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end; /* Aligns bar to bottom */
-            align-items: center;
-            width: 20%;
-            height: 100%; /* Ensures wrapper has full height for bar calculation */
-        }
-        .bar {
-            width: 100%;
-            background-color: #4A5568;
-            border-radius: 6px 6px 0 0;
+        .hero-gradient-bg {
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0d1117 100%);
             position: relative;
+            overflow: hidden;
         }
-        .bar-label {
+        .animated-grid {
             position: absolute;
-            top: -24px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-weight: 600;
-            color: #1A202C;
-            font-size: 0.875rem;
-        }
-        .bar-country {
-            margin-top: 8px;
-            font-weight: 500;
-            color: #4A5568;
-            font-size: 0.875rem;
-        }
-        .highlight-bar {
-            background-color: #3B82F6; /* Blue 500 */
-        }
-        .problem-bar {
-             background-color: #EF4444; /* Red 500 */
-        }
-        .timeline-item {
-            position: relative;
-            padding-left: 2rem;
-        }
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: 0.4rem;
-            top: 0.5rem;
-            width: 1px;
-            height: 100%;
-            background-color: #CBD5E0;
-        }
-         .timeline-item:last-child::before {
-            display: none;
-        }
-        .timeline-dot {
-            position: absolute;
+            top: 0;
             left: 0;
-            top: 0.5rem;
-            width: 1rem;
-            height: 1rem;
-            border-radius: 9999px;
-            background-color: white;
-            border: 2px solid #3B82F6;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(to right, rgba(38, 50, 56, 0.3) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(38, 50, 56, 0.3) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: pan-grid 20s linear infinite;
+        }
+        @keyframes pan-grid {
+            0% { background-position: 0 0; }
+            100% { background-position: 40px 40px; }
+        }
+        .section-title {
+            color: #58a6ff; /* A bright blue for titles */
+        }
+        .card {
+            background-color: #161b22; /* A slightly lighter dark blue */
+            border: 1px solid #30363d;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #58a6ff;
+        }
+        .btn-primary {
+            background-color: #238636; /* A contrasting green for CTAs */
+            color: #ffffff;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #2ea043;
+        }
+        .btn-secondary {
+            background-color: transparent;
+            color: #58a6ff;
+            border: 1px solid #58a6ff;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #58a6ff;
+            color: #161b22;
+        }
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
-<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen p-4">
+<body class="antialiased">
 
-    <div class="w-full max-w-5xl bg-white shadow-2xl rounded-lg overflow-hidden">
-        <!-- Slides Container -->
-        <div class="relative">
-            <!-- Slide 1: Title -->
-            <div id="slide1" class="slide active flex-col items-center justify-center text-center p-8 md:p-16 bg-gray-800 text-white">
-                <h1 class="text-3xl md:text-5xl font-bold mb-4">Strategic Review of a Graduate Trainee Program</h1>
-                <p class="text-lg md:text-2xl text-blue-300 mb-12">A Data-Driven Proposal to Increase Program ROI by Shifting Recruitment Focus Between Regions</p>
-                <div class="text-left w-full max-w-md">
-                    <p class="text-md text-gray-300"><span class="font-semibold">Presented By:</span> Huzaifah Adam, Analyst</p>
-                    <p class="text-md text-gray-300"><span class="font-semibold">Date:</span> August 2025</p>
-                </div>
-                <div class="w-full max-w-3xl mt-12 text-center">
-                    <p class="text-sm text-gray-400 italic">
-                        Please note: This presentation is a sanitized version of a business case, created for portfolio purposes. All company names, proprietary data, and specific financial figures have been anonymized or modified to protect confidentiality. The data used is illustrative and serves to demonstrate the analytical approach.
-                    </p>
-                </div>
+    <!-- Header -->
+    <header class="bg-black/30 backdrop-blur-md fixed top-0 left-0 right-0 z-50 border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="text-xl font-bold text-white">HUZAIFAH ADAM</div>
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#statement" class="text-gray-400 hover:text-white transition-colors">Statement</a>
+                    <a href="#portfolio" class="text-gray-400 hover:text-white transition-colors">Portfolio</a>
+                    <a href="#skills" class="text-gray-400 hover:text-white transition-colors">Skills</a>
+                    <a href="#certificates" class="text-gray-400 hover:text-white transition-colors">Certificates</a>
+                    <a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a>
+                </nav>
             </div>
-
-            <!-- Slide 2: Executive Summary -->
-            <div id="slide2" class="slide flex-col justify-center p-8 md:p-12">
-                <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Executive Summary</h2>
-                <div class="space-y-6">
-                    <div class="flex items-start">
-                        <div class="flex-shrink-0 mr-4 mt-1">
-                             <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-semibold text-gray-700">The Problem</h3>
-                            <p class="text-gray-600">The program's ROI is weakened by a low success rate from graduates sourced from one key region ("Region B"), representing a substantial loss in training and recruitment investment.</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start">
-                         <div class="flex-shrink-0 mr-4 mt-1">
-                            <svg class="w-8 h-8 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-semibold text-gray-700">The Opportunity</h3>
-                            <p class="text-gray-600">Historical data shows graduates from another region ("Region A") are the most successful cohort, offering a more reliable and cost-effective talent pipeline.</p>
-                        </div>
-                    </div>
-                     <div class="flex items-start">
-                         <div class="flex-shrink-0 mr-4 mt-1">
-                           <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-semibold text-gray-700">The Recommendation</h3>
-                            <p class="text-gray-600">We propose a pilot program to reallocate recruitment budget to expand hiring from Region A, with the goal of increasing the overall program success rate.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 3: The Business Problem -->
-            <div id="slide3" class="slide flex-col justify-center p-8 md:p-12">
-                 <h2 class="text-3xl font-bold text-gray-800 mb-2 text-center">The Business Problem: Underperformance is Costly</h2>
-                 <p class="text-lg text-gray-600 text-center mb-8">High attrition in one region significantly impacts the program's overall return on investment.</p>
-                 <div class="w-full max-w-lg mx-auto">
-                     <div class="bar-chart-container">
-                        <div class="bar-wrapper"><div class="bar highlight-bar" style="height: 83.3%;"><span class="bar-label">83.3%</span></div><span class="bar-country">Region A</span></div>
-                        <div class="bar-wrapper"><div class="bar" style="height: 78.6%; background-color: #6B7280;"><span class="bar-label">78.6%</span></div><span class="bar-country">Region C</span></div>
-                        <div class="bar-wrapper"><div class="bar problem-bar" style="height: 55.6%;"><span class="bar-label">55.6%</span></div><span class="bar-country">Region B</span></div>
-                     </div>
-                 </div>
-                 <div class="mt-8 text-center bg-blue-50 border-l-4 border-blue-500 text-blue-700 p-4 rounded-r-lg">
-                    <p class="font-semibold">Key Insight:</p>
-                    <p>This performance gap translates directly to wasted resources, project instability, and a higher-than-necessary cost to acquire successful, long-term talent.</p>
-                 </div>
-            </div>
-            
-            <!-- Slide 4: Core Analysis -->
-            <div id="slide4" class="slide flex-col justify-center p-8 md:p-12">
-                 <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Core Analysis: Success Rates by Origin (Illustrative Data)</h2>
-                 <p class="text-lg text-gray-600 text-center mb-8">Region A Has Emerged as Our Highest-Performing Talent Source</p>
-                 <div class="w-full max-w-2xl mx-auto mb-8">
-                     <div class="bar-chart-container">
-                        <div class="bar-wrapper"><div class="bar highlight-bar" style="height: 83.3%;"><span class="bar-label">83.3%</span></div><span class="bar-country">Region A</span></div>
-                        <div class="bar-wrapper"><div class="bar" style="height: 78.6%; background-color: #6B7280;"><span class="bar-label">78.6%</span></div><span class="bar-country">Region C</span></div>
-                        <div class="bar-wrapper"><div class="bar" style="height: 66.7%; background-color: #9CA3AF;"><span class="bar-label">66.7%</span></div><span class="bar-country">Region D</span></div>
-                        <div class="bar-wrapper"><div class="bar problem-bar" style="height: 55.6%;"><span class="bar-label">55.6%</span></div><span class="bar-country">Region B</span></div>
-                     </div>
-                 </div>
-                 <div class="w-full max-w-2xl mx-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Region</th>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Total Hires</th>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Successful Grads</th>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Success Rate</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            <tr><td class="px-6 py-4 whitespace-nowrap font-medium">Region A (e.g. Australia)</td><td class="px-6 py-4 text-center">--</td><td class="px-6 py-4 text-center">--</td><td class="px-6 py-4 text-center font-bold text-blue-600">83.3%</td></tr>
-                            <tr><td class="px-6 py-4 whitespace-nowrap font-medium">Region C (e.g. UK)</td><td class="px-6 py-4 text-center">--</td><td class="px-6 py-4 text-center">--</td><td class="px-6 py-4 text-center font-semibold">78.6%</td></tr>
-                            <tr><td class="px-6 py-4 whitespace-nowrap font-medium">Region D (e.g. Malaysia)</td><td class="px-6 py-4 text-center">--</td><td class="px-6 py-4 text-center">--</td><td class="px-6 py-4 text-center">66.7%</td></tr>
-                            <tr><td class="px-6 py-4 whitespace-nowrap font-medium">Region B (e.g. USA)</td><td class="px-6 py-4 text-center">--</td><td class="px-6 py-4 text-center">--</td><td class="px-6 py-4 text-center font-bold text-red-600">55.6%</td></tr>
-                        </tbody>
-                    </table>
-                 </div>
-            </div>
-            
-            <!-- Slide 5: The Financial Impact -->
-            <div id="slide5" class="slide flex-col justify-center p-8 md:p-12">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4 text-center">The Financial Impact: Measuring the ROI Gap</h2>
-                <p class="text-lg text-gray-600 text-center mb-8">"The Effective Cost of a Successful Graduate is 50% Higher in Region B"</p>
-                <div class="bg-gray-50 rounded-lg p-6 mb-8 w-full max-w-3xl mx-auto">
-                    <h3 class="font-semibold text-center text-gray-700">Concept Explanation</h3>
-                    <p class="text-center text-gray-600">To account for program failures, we calculate the 'Effective Cost per Successful Graduate.' This reveals the true investment needed to get one successful employee from each region.</p>
-                </div>
-
-                <div class="flex flex-col md:flex-row justify-around items-center w-full max-w-4xl mx-auto space-y-8 md:space-y-0">
-                    <!-- Region B Infographic -->
-                    <div class="text-center p-6 border-2 border-red-200 rounded-lg bg-red-50">
-                        <h3 class="text-xl font-bold text-red-700 mb-4">Region B</h3>
-                        <div class="flex items-center justify-center space-x-4">
-                            <div class="flex space-x-1">
-                                <svg class="w-10 h-10 text-red-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
-                                <svg class="w-10 h-10 text-red-300 opacity-50" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
-                            </div>
-                            <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                            <svg class="w-10 h-10 text-red-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
-                        </div>
-                        <p class="mt-4 text-2xl font-bold text-red-800">1.8x Investment</p>
-                    </div>
-                     <!-- Region A Infographic -->
-                    <div class="text-center p-6 border-2 border-blue-200 rounded-lg bg-blue-50">
-                        <h3 class="text-xl font-bold text-blue-700 mb-4">Region A</h3>
-                        <div class="flex items-center justify-center space-x-4">
-                            <div class="flex space-x-1">
-                                <svg class="w-10 h-10 text-blue-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
-                                <svg class="w-10 h-10 text-blue-300 opacity-50" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
-                            </div>
-                            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                            <svg class="w-10 h-10 text-blue-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
-                        </div>
-                        <p class="mt-4 text-2xl font-bold text-blue-800">1.2x Investment</p>
-                    </div>
-                </div>
-                 <p class="mt-8 text-center text-lg text-gray-700 font-semibold">"Focusing on high-performing regions allows us to achieve our talent goals with greater financial efficiency."</p>
-            </div>
-
-            <!-- Slide 6: Recommendation -->
-            <div id="slide6" class="slide flex-col justify-center p-8 md:p-12">
-                 <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Proposal: Reallocate Recruitment Efforts to Maximize Success</h2>
-                 <div class="w-full max-w-3xl mx-auto space-y-8">
-                     <div class="flex items-center bg-gray-50 p-6 rounded-lg shadow-sm">
-                        <div class="flex-shrink-0 mr-6"><div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01"></path></svg></div></div>
-                        <div>
-                            <h3 class="text-xl font-semibold text-gray-800">1. Reallocate Budget</h3>
-                            <p class="text-gray-600">Reallocate a portion of the recruitment budget to a Region A-focused pilot for the next intake cycle.</p>
-                        </div>
-                     </div>
-                     <div class="flex items-center bg-gray-50 p-6 rounded-lg shadow-sm">
-                        <div class="flex-shrink-0 mr-6"><div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg></div></div>
-                        <div>
-                            <h3 class="text-xl font-semibold text-gray-800">2. Targeted Expansion</h3>
-                            <p class="text-gray-600">Identify and build relationships with top-tier universities in Region A aligned with our talent needs.</p>
-                        </div>
-                     </div>
-                     <div class="flex items-center bg-gray-50 p-6 rounded-lg shadow-sm">
-                        <div class="flex-shrink-0 mr-6"><div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg></div></div>
-                        <div>
-                            <h3 class="text-xl font-semibold text-gray-800">3. Measure & Validate</h3>
-                            <p class="text-gray-600">Implement clear KPIs to compare the pilot cohort's performance against the baseline.</p>
-                        </div>
-                     </div>
-                 </div>
-            </div>
-
-            <!-- Slide 7: Expected Outcomes -->
-             <div id="slide7" class="slide flex-col justify-center p-8 md:p-12">
-                 <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Anticipated Results of a Successful Pilot</h2>
-                 <div class="w-full max-w-2xl mx-auto space-y-6">
-                     <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-r-lg">
-                        <h3 class="text-xl font-semibold text-green-800 mb-2">Key Performance Indicators (KPIs)</h3>
-                        <ul class="list-disc list-inside text-green-700 space-y-2">
-                            <li>Significantly increase the overall graduate program success rate.</li>
-                            <li>Lower the effective cost-per-successful-graduate.</li>
-                            <li>Improve long-term retention of program graduates.</li>
-                        </ul>
-                     </div>
-                 </div>
-             </div>
-
-            <!-- Slide 8: Implementation Roadmap -->
-            <div id="slide8" class="slide flex-col justify-center p-8 md:p-12">
-                 <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Phased Rollout for the Next Cohort</h2>
-                 <div class="w-full max-w-xl mx-auto">
-                    <div class="space-y-8">
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <h3 class="text-lg font-semibold text-blue-600">Phase 1 (Q1): Planning & University Selection</h3>
-                            <p class="text-gray-600">Finalize budget reallocation and select partner universities in the target region.</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <h3 class="text-lg font-semibold text-blue-600">Phase 2 (Q2): Recruitment Campaign Launch</h3>
-                            <p class="text-gray-600">Launch recruitment marketing campaign for the pilot program.</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <h3 class="text-lg font-semibold text-blue-600">Phase 3 (Q3-Q4): Hiring & Onboarding</h3>
-                            <p class="text-gray-600">Complete hiring for both cohorts and begin onboarding.</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <h3 class="text-lg font-semibold text-blue-600">Phase 4 (End of Cycle): Performance Analysis & Final Recommendation</h3>
-                            <p class="text-gray-600">Analyze results of the pilot and present final recommendations for future cycles.</p>
-                        </div>
-                    </div>
-                 </div>
-            </div>
-
-            <!-- Slide 9: Risks & Mitigation -->
-             <div id="slide9" class="slide flex-col justify-center p-8 md:p-12">
-                 <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Proactively Managing Potential Risks</h2>
-                 <div class="w-full max-w-3xl mx-auto">
-                    <div class="shadow-md rounded-lg overflow-hidden">
-                        <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-100">
-                                <tr>
-                                    <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase">Potential Risk</th>
-                                    <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase">Mitigation Strategy</th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
-                                <tr>
-                                    <td class="px-6 py-4 align-top">
-                                        <p class="font-medium text-gray-800">Limited Applicant Pool</p>
-                                        <p class="text-sm text-gray-500">Initial candidate numbers from new universities may be low.</p>
-                                    </td>
-                                    <td class="px-6 py-4 text-gray-600">Partner with university career centers and alumni groups; launch a targeted digital marketing campaign.</td>
-                                </tr>
-                                 <tr>
-                                    <td class="px-6 py-4 align-top">
-                                        <p class="font-medium text-gray-800">Cultural Integration</p>
-                                        <p class="text-sm text-gray-500">New cohort may face unique integration challenges.</p>
-                                    </td>
-                                    <td class="px-6 py-4 text-gray-600">Enhance onboarding program with dedicated cross-cultural mentoring and support resources.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                 </div>
-             </div>
-
-            <!-- Slide 10: Q&A -->
-             <div id="slide10" class="slide flex-col items-center justify-center text-center p-8 md:p-16">
-                <h2 class="text-4xl md:text-6xl font-bold text-gray-800 mb-4">Conclusion</h2>
-                <p class="text-2xl md:text-3xl text-gray-600 mb-12">Next Steps & Q&A</p>
-                <div class="bg-blue-100 text-blue-800 text-lg font-semibold p-6 rounded-lg">
-                    <p>The key recommendation is to launch a pilot program to validate this data-driven strategy.</p>
-                </div>
-            </div>
-
         </div>
-    </div>
+    </header>
 
-    <!-- Navigation -->
-    <div class="w-full max-w-5xl mt-4 flex justify-between items-center px-4">
-        <button id="prevBtn" class="bg-gray-700 text-white py-2 px-4 rounded-lg hover:bg-gray-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-        </button>
-        <div id="slide-counter" class="text-gray-600 font-medium">
-            Slide 1 / 10
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-gradient-bg pt-40 pb-24 text-white">
+            <div class="animated-grid"></div>
+            <div class="container mx-auto px-6 text-center relative z-10">
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4">Leveraging Data Analytics to Drive Strategic Human Capital Outcomes</h1>
+                <p class="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-8">
+                    I transform complex data into clear, actionable strategies that drive organizational growth and empower people.
+                </p>
+                <a href="#portfolio" class="btn-primary font-bold px-8 py-3 rounded-lg text-lg inline-block">
+                    View My Work
+                </a>
+            </div>
+        </section>
+
+        <!-- Professional Statement Section -->
+        <section id="statement" class="py-20 md:py-28 bg-[#0d1117]">
+            <div class="container mx-auto px-6">
+                <div class="fade-in-up max-w-5xl mx-auto grid md:grid-cols-3 gap-12 items-center">
+                    <div class="md:col-span-1">
+                        <img src="https://media.licdn.com/dms/image/v2/D4E03AQGMzOiibp9deg/profile-displayphoto-shrink_200_200/B4EZSaZX9IG0Ac-/0/1737757131319?e=1759968000&v=beta&t=KZxbQaLV226qHX7ZZerT7hz8Pf9XycMpmIaIT03icDQ" alt="A professional headshot of Huzaifah Adam." class="rounded-full border-4 border-gray-800 shadow-2xl">
+                    </div>
+                    <div class="md:col-span-2">
+                        <h2 class="section-title text-sm font-bold tracking-widest uppercase mb-4">PROFESSIONAL STATEMENT</h2>
+                        <blockquote class="text-2xl md:text-3xl font-light text-white leading-relaxed border-l-4 border-blue-500 pl-6">
+                            "I am driven by the intersection of data and human psychology, transforming complex information into clear, actionable strategies that empower organizations and their people."
+                        </blockquote>
+                        <p class="mt-6 text-lg font-bold text-white">Huzaifah Adam</p>
+                        <p class="text-gray-400">Strategic Analyst, advising on human capital initiatives at Khazanah Nasional Berhad.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Competencies Section -->
+        <section class="py-20 md:py-28 bg-[#161b22]">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="section-title text-sm font-bold tracking-widest uppercase mb-4 fade-in-up">Core Competencies</h2>
+                    <p class="text-3xl md:text-4xl font-bold text-white max-w-3xl mx-auto fade-in-up" style="transition-delay: 100ms;">My expertise lies at the intersection of strategy, data, and people.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="card p-8 fade-in-up" style="transition-delay: 200ms;">
+                        <h3 class="text-2xl font-bold text-white mb-2">HR Strategy & Transformation</h3>
+                        <p class="text-gray-400">Developing and implementing talent frameworks and process improvements that align with strategic business goals.</p>
+                    </div>
+                    <div class="card p-8 fade-in-up" style="transition-delay: 300ms;">
+                        <h3 class="text-2xl font-bold text-white mb-2">Data-Driven Advisory</h3>
+                        <p class="text-gray-400">Utilizing quantitative and qualitative data to provide leadership with tangible arguments for evidence-based decisions.</p>
+                    </div>
+                    <div class="card p-8 fade-in-up" style="transition-delay: 400ms;">
+                        <h3 class="text-2xl font-bold text-white mb-2">Stakeholder Management</h3>
+                        <p class="text-gray-400">Leading cross-functional initiatives and managing high-stakes events to ensure alignment with all stakeholders.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="py-20 md:py-28 bg-[#0d1117]">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="section-title text-sm font-bold tracking-widest uppercase mb-4 fade-in-up">Portfolio Highlights</h2>
+                    <p class="text-3xl md:text-4xl font-bold text-white max-w-2xl mx-auto fade-in-up" style="transition-delay: 100ms;">Selected case studies of my work.</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- Project 1 -->
+                    <div class="card p-8 flex flex-col fade-in-up">
+                        <div class="flex-grow">
+                            <p class="text-blue-400 font-semibold">Case Study 1</p>
+                            <h3 class="text-3xl font-bold text-white mt-2 mb-4">A Data-Driven Proposal to Increase Program ROI by Shifting Recruitment Focus Between Regions.</h3>
+                            <p class="text-gray-400">Strategic Review of a Graduate Trainee Program</p>
+                        </div>
+                        <div class="mt-6">
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-gray-700 text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded">Data Analysis</span>
+                                <span class="bg-gray-700 text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded">Change Management</span>
+                                <span class="bg-gray-700 text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded">Strategic Planning</span>
+                            </div>
+                            <a href="https://casestudyone-sanitized.pages.dev/Case%20study%201%20(sanitized)" target="_blank" rel="noopener noreferrer" class="font-semibold text-white hover:text-blue-400 transition-colors">View Case Study &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- Project 2 -->
+                    <div class="card p-8 flex flex-col fade-in-up">
+                        <div class="flex-grow">
+                            <p class="text-blue-400 font-semibold">Case Study 2</p>
+                            <h3 class="text-3xl font-bold text-white mt-2 mb-4">A Data-Driven Proposal to Enhance the Success Rate of Locally-Trained Economics Graduates at a leading Malaysian GLIC</h3>
+                            <p class="text-gray-400">Strategic Review of a Graduate Trainee Program.</p>
+                        </div>
+                        <div class="mt-6">
+                             <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-gray-700 text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded">Project Coordination</span>
+                                <span class="bg-gray-700 text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded">Decision Making</span>
+                                <span class="bg-gray-700 text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded">Stakeholder Engagement</span>
+                            </div>
+                            <a href="https://casestudyone-sanitized.pages.dev/Case%20study%202%20(sanitized)" target="_blank" rel="noopener noreferrer" class="font-semibold text-white hover:text-blue-400 transition-colors">View Case Study &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- Project 3 -->
+                    <div class="card p-8 flex flex-col fade-in-up">
+                        <div class="flex-grow">
+                            <p class="text-blue-400 font-semibold">Case Study 3</p>
+                            <h3 class="text-3xl font-bold text-white mt-2 mb-4">A Strategic Overhaul of a Premier Talent Retention Program.</h3>
+                            <p class="text-gray-400">Strategic Review of a Graduate Trainee Program.</p>
+                        </div>
+                        <div class="mt-6">
+                             <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-gray-700 text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded">Problem Solving</span>
+                                <span class="bg-gray-700 text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded">Forward Thinking</span>
+                                <span class="bg-gray-700 text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded">Analytical Thinking</span>
+                                <span class="bg-gray-700 text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded">Strategic Planning</span>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <a href="https://casestudyone-sanitized.pages.dev/Case%20study%203%20(sanitized)" target="_blank" rel="noopener noreferrer" class="font-semibold text-white hover:text-blue-400 transition-colors">View Case Study &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Project 4 -->
+                    <div class="card p-8 flex flex-col fade-in-up">
+                        <div class="flex-grow">
+                            <p class="text-blue-400 font-semibold">Case Study 4</p>
+                            <h3 class="text-3xl font-bold text-white mt-2 mb-4">Addressing Challenges on Domestic Talent Pipeline</h3>
+                            <p class="text-gray-400">Strategic Review of a Graduate Trainee Program.</p>
+                        </div>
+                        <div class="mt-6">
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-gray-700 text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded">Diversityt</span>
+                                <span class="bg-gray-700 text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded">Community Stewardship</span>
+                                <span class="bg-gray-700 text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded">SPSS</span>
+                                <span class="bg-gray-700 text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded">RStudio</span>
+                            </div>
+                            <a href="https://casestudyone-sanitized.pages.dev/Case%20study%204%20(sanitized)" target="_blank" rel="noopener noreferrer" class="font-semibold text-white hover:text-blue-400 transition-colors">View Case Study &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- Project 5 -->
+                    <div class="card p-8 flex flex-col fade-in-up">
+                        <div class="flex-grow">
+                            <p class="text-blue-400 font-semibold">Case Study 5</p>
+                            <h3 class="text-3xl font-bold text-white mt-2 mb-4">Streamlining Processes to Build a Sustainable Recruitment Model.</h3>
+                            <p class="text-gray-400">Strategic Review of a Graduate Trainee Program.</p>
+                        </div>
+                        <div class="mt-6">
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-gray-700 text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded">Process Development</span>
+                                <span class="bg-gray-700 text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded">Automation</span>
+                                <span class="bg-gray-700 text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded">AI</span>
+                                <span class="bg-gray-700 text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded">Team Efficiency</span>
+                            </div>
+                            <a href="https://casestudyone-sanitized.pages.dev/Case%20study%205%20(sanitized)" target="_blank" rel="noopener noreferrer" class="font-semibold text-white hover:text-blue-400 transition-colors">View Case Study &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Proficiencies Section -->
+        <section id="skills" class="py-20 md:py-28 bg-[#161b22]">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="section-title text-sm font-bold tracking-widest uppercase mb-4 fade-in-up">Technical Proficiencies</h2>
+                    <p class="text-3xl md:text-4xl font-bold text-white max-w-3xl mx-auto fade-in-up" style="transition-delay: 100ms;">Hands-on skills in data visualization and web development.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="card p-6 fade-in-up">
+                        <h3 class="text-2xl font-bold text-white mb-4">Data Visualization (Power BI)</h3>
+                        <p class="text-gray-400 mb-4">I build intuitive dashboards to translate complex datasets into actionable insights. Below are samples from a training feedback survey I developed.</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                           <img src="https://i.postimg.cc/fS0x3mzp/Screenshot-2025-08-23-232004.png" alt="A Power BI dashboard showing an overview of a training feedback survey, with metrics like response rate and overall score." class="rounded-lg shadow-xl border border-gray-700">
+                           <img src="https://i.postimg.cc/SY7LYJnG/image-42ac08.png" alt="A detailed drill-down view of a Power BI dashboard, showing scores by key area for a specific training module." class="rounded-lg shadow-xl border border-gray-700">
+                        </div>
+                    </div>
+                    <div class="card p-6 fade-in-up">
+                        <h3 class="text-2xl font-bold text-white mb-4">Web Development (HTML & CSS)</h3>
+                        <p class="text-gray-400 mb-4">I create clean, professional, and responsive webpages for specific business needs, such as the event info deck shown below.</p>
+                        <a href="https://knbhrn2025.pages.dev/knbhrnetwork" target="_blank" rel="noopener noreferrer" class="block aspect-video bg-gray-800 rounded-lg p-4 border border-gray-700 hover:border-blue-500 transition-colors">
+                             <div class="bg-white rounded-md h-full w-full p-2">
+                                <div class="flex items-center space-x-1 mb-2">
+                                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                </div>
+                                <div style="background-color: #2B3889" class="h-6 w-full rounded-t-sm"></div>
+                                <div class="bg-gray-100 h-24 w-full"></div>
+                             </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certificates Section -->
+        <section id="certificates" class="py-20 md:py-28 bg-[#0d1117]">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="section-title text-sm font-bold tracking-widest uppercase mb-4 fade-in-up">Certificates & Credentials</h2>
+                    <p class="text-3xl md:text-4xl font-bold text-white max-w-3xl mx-auto fade-in-up" style="transition-delay: 100ms;">My certifications in finance and data analytics provide a unique ability to quantify the business impact of human capital initiatives.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Certificate 1 -->
+                    <div class="card p-6 flex items-start space-x-4 fade-in-up" style="transition-delay: 200ms;">
+                        <div class="flex-shrink-0 text-green-400">
+                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zM9 12a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" /><path d="M2 10a8 8 0 1116 0 8 8 0 01-16 0zm8-7a7 7 0 100 14 7 7 0 000-14z" /></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-white text-lg">Financial Modeling</h3>
+                            <p class="text-gray-400 text-sm">Training The Street</p>
+                            <p class="text-xs text-gray-500 mt-1">Issued Nov 2024</p>
+                        </div>
+                    </div>
+                     <!-- Certificate 2 -->
+                    <div class="card p-6 flex items-start space-x-4 fade-in-up" style="transition-delay: 300ms;">
+                        <div class="flex-shrink-0 text-green-400">
+                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zM9 12a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" /><path d="M2 10a8 8 0 1116 0 8 8 0 01-16 0zm8-7a7 7 0 100 14 7 7 0 000-14z" /></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-white text-lg">Valuation</h3>
+                            <p class="text-gray-400 text-sm">Training The Street</p>
+                            <p class="text-xs text-gray-500 mt-1">Issued Nov 2024</p>
+                        </div>
+                    </div>
+                     <!-- Certificate 3 -->
+                    <div class="card p-6 flex items-start space-x-4 fade-in-up" style="transition-delay: 400ms;">
+                        <div class="flex-shrink-0 text-blue-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zM9 12a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" /><path d="M2 10a8 8 0 1116 0 8 8 0 01-16 0zm8-7a7 7 0 100 14 7 7 0 000-14z" /></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-white text-lg">Data-Driven Decisions</h3>
+                            <p class="text-gray-400 text-sm">Coursera</p>
+                            <p class="text-xs text-gray-500 mt-1">Issued Aug 2022</p>
+                        </div>
+                    </div>
+                     <!-- Certificate 4 -->
+                    <div class="card p-6 flex items-start space-x-4 fade-in-up" style="transition-delay: 500ms;">
+                        <div class="flex-shrink-0 text-blue-400">
+                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zM9 12a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" /><path d="M2 10a8 8 0 1116 0 8 8 0 01-16 0zm8-7a7 7 0 100 14 7 7 0 000-14z" /></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-white text-lg">Foundations: Data, Data, Everywhere</h3>
+                            <p class="text-gray-400 text-sm">Coursera</p>
+                            <p class="text-xs text-gray-500 mt-1">Issued Aug 2022</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 md:py-28 bg-[#0d1117] text-center">
+            <div class="container mx-auto px-6 fade-in-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Connect?</h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-8">I am always open to discussing new opportunities and collaborations. Let's discuss how I can bring value to your team.</p>
+                <a href="mailto:huzaifah.adam.98@gmail.com" class="btn-primary font-bold px-10 py-4 rounded-lg text-lg inline-block">
+                    Get In Touch
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#0d1117] border-t border-gray-800 py-8">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <div class="flex justify-center space-x-6 mb-4">
+                 <a href="https://www.linkedin.com/in/huzaifah-adam-gmpsss-a2a334183/" target="_blank" rel="noopener noreferrer" class="hover:text-white"><span class="sr-only">LinkedIn</span><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+            </div>
+            <p>&copy; 2025 Huzaifah Adam. All Rights Reserved.</p>
         </div>
-        <button id="nextBtn" class="bg-gray-700 text-white py-2 px-4 rounded-lg hover:bg-gray-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-        </button>
-    </div>
+    </footer>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const slides = document.querySelectorAll('.slide');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const slideCounter = document.getElementById('slide-counter');
-        const totalSlides = slides.length;
-        let currentSlide = 1;
-
-        function showSlide(n) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            const newSlide = document.getElementById(`slide${n}`);
-            if (newSlide) {
-                newSlide.classList.add('active');
-            }
-            updateControls();
-        }
-
-        function updateControls() {
-            slideCounter.textContent = `Slide ${currentSlide} / ${totalSlides}`;
-            prevBtn.disabled = currentSlide === 1;
-            nextBtn.disabled = currentSlide === totalSlides;
-        }
-
-        function nextSlide() {
-            if (currentSlide < totalSlides) {
-                currentSlide++;
-                showSlide(currentSlide);
-            }
-        }
-
-        function prevSlide() {
-            if (currentSlide > 1) {
-                currentSlide--;
-                showSlide(currentSlide);
-            }
-        }
-
-        nextBtn.addEventListener('click', nextSlide);
-        prevBtn.addEventListener('click', prevSlide);
-
-        // Keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowRight') {
-                nextSlide();
-            } else if (e.key === 'ArrowLeft') {
-                prevSlide();
-            }
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Animation Observer for fade-in effect ---
+            const animatedElements = document.querySelectorAll('.fade-in-up');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            animatedElements.forEach(el => observer.observe(el));
         });
-
-        // Initial setup
-        showSlide(currentSlide);
-    });
-</script>
-
+    </script>
 </body>
 </html>
+
