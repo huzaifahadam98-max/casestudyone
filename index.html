@@ -1,5 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { Bookmark, ChevronLeft, ChevronRight, Briefcase } from 'lucide-react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Huzaifah Adam - Portfolio</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- React & ReactDOM -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  
+  <!-- Babel -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-[#0d1117] text-[#c9d1d9]">
+  <div id="root"></div>
+
+  <script type="text/babel" data-type="module">
+    import { Bookmark, ChevronLeft, ChevronRight, Briefcase } from 'https://esm.sh/lucide-react@0.292.0';
+    const { useState, useEffect } = React;
 
 // --- STORY DATA ---
 const stories = [
@@ -41,7 +62,7 @@ const stories = [
   }
 ];
 
-export default function App() {
+function App() {
   const [isProfessionalView, setIsProfessionalView] = useState(true);
   const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
 
@@ -485,3 +506,9 @@ export default function App() {
     </div>
   );
 }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
