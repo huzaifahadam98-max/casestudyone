@@ -1,26 +1,78 @@
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@plugin "@tailwindcss/typography";
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-main: #f8fafc;
+  --color-card: #ffffff;
+  --color-borderline: #e2e8f0;
+  --color-textmain: #0f172a;
+  --color-textmuted: #475569;
+  --color-accent: #16a34a;
+  --color-accenthover: #15803d;
+  
+  /* Additional Tailwind Utilities for font families */
+  --font-sans: "Inter", var(--default-font-family);
+}
+
+:root {
+  --background: var(--color-main);
+  --foreground: var(--color-textmain);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--color-textmain);
+    --foreground: var(--color-main);
+    --color-card: #1e293b;
+    --color-borderline: #334155;
+    --color-textmain: #f8fafc;
+    --color-textmuted: #cbd5e1;
+    --color-main: #0f172a;
   }
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom CSS classes from Nomad AI template */
+@layer utilities {
+  .hero-gradient-bg {
+    background: linear-gradient(135deg, var(--color-main) 0%, var(--color-borderline) 50%, var(--color-main) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .animated-grid {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+        linear-gradient(to right, rgba(15, 23, 42, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(15, 23, 42, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: pan-grid 20s linear infinite;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .animated-grid {
+      background-image:
+          linear-gradient(to right, rgba(248, 250, 252, 0.05) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(248, 250, 252, 0.05) 1px, transparent 1px);
+    }
+  }
+
+  @keyframes pan-grid {
+    0% { background-position: 0 0; }
+    100% { background-position: 40px 40px; }
+  }
+
+  .nav-backdrop {
+    background-color: rgba(from var(--color-main) r g b / 0.85); /* using CSS relative syntax */
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-borderline);
+  }
 }
