@@ -139,7 +139,7 @@ const journeyData = [
 
 export default function HumanSidePage({ onSwitchBack }: { onSwitchBack: () => void }) {
   const [filter, setFilter] = useState('All');
-  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
 
   const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
@@ -268,10 +268,10 @@ export default function HumanSidePage({ onSwitchBack }: { onSwitchBack: () => vo
 
   useEffect(() => {
     setTimeout(drawSwirl, 100);
-    if (expandedId !== null) {
+    if (expandedIds.size > 0) {
       setTimeout(drawSwirl, 550); // wait for accordion animation
     }
-  }, [filter, expandedId]);
+  }, [filter, expandedIds]);
 
   // Drag to scroll
   useEffect(() => {
@@ -311,11 +311,23 @@ export default function HumanSidePage({ onSwitchBack }: { onSwitchBack: () => vo
   }, []);
 
   const toggleAccordion = (id: string) => {
-    setExpandedId(prev => (prev === id ? null : id));
+    setExpandedIds(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(id)) {
+        newSet.delete(id);
+      } else {
+        newSet.add(id);
+      }
+      return newSet;
+    });
+  };
+
+  const collapseAll = () => {
+    setExpandedIds(new Set());
   };
 
   const handleFilter = (category: string) => {
-    setExpandedId(null);
+    setExpandedIds(new Set());
     setFilter(category);
     const slider = document.getElementById('horizontal-scroll');
     if (slider) slider.scrollTo({ left: 0, behavior: 'smooth' });
@@ -462,30 +474,6 @@ export default function HumanSidePage({ onSwitchBack }: { onSwitchBack: () => vo
             </div>
         </div>
 
-        <div className="relative z-10 gs-reveal">
-            <div className="mb-6 border-b border-[#EAE3D9] pb-2 max-w-max">
-                <h2 className="text-2xl text-[#3B3155] serif-font">Filter My Journey</h2>
-            </div>
-            
-            <div className="flex flex-wrap gap-2 md:gap-4" id="filter-buttons">
-                {['All', 'Experience', 'Volunteer', 'Education', 'Creative'].map(cat => (
-                  <button 
-                    key={cat}
-                    onClick={() => handleFilter(cat)} 
-                    className={`filter-btn px-4 py-2 text-sm rounded-full transition-all duration-300 ${filter === cat ? 'bg-white text-[#D95C14] border border-[#EAE3D9] shadow-sm font-semibold' : 'bg-transparent text-[#5B487A] border border-transparent hover:text-[#D95C14] font-medium'}`}
-                  >
-                    {cat === 'All' ? 'All Experiences' : cat === 'Experience' ? 'Corporate Experience' : cat === 'Volunteer' ? 'Volunteering & Mentorship' : cat === 'Creative' ? 'Outdoors & Creative' : cat}
-                  </button>
-                ))}
-            </div>
-            
-            <svg className="absolute right-0 bottom-0 w-48 opacity-10 pointer-events-none" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
-                <path d="M100 140 L100 80 M100 80 L70 120 M100 80 L130 110 M100 60 L80 90 M100 60 L120 85 M100 40 L90 60 M100 40 L110 55" stroke="#3B3155" strokeWidth="4" strokeLinecap="round" fill="none"/>
-                <circle cx="100" cy="50" r="40" fill="#D95C14" opacity="0.3"/>
-                <circle cx="80" cy="80" r="30" fill="#F2A65A" opacity="0.4"/>
-                <circle cx="120" cy="70" r="35" fill="#3B3155" opacity="0.2"/>
-            </svg>
-        </div>
       </section>
 
       {/* Journey Section */}
@@ -507,8 +495,31 @@ export default function HumanSidePage({ onSwitchBack }: { onSwitchBack: () => vo
                 <h2 className="text-4xl md:text-5xl text-[#3B3155] mb-4 serif-font">My Journey</h2>
                 <p className="text-[#5B487A] max-w-2xl mx-auto text-sm md:text-base font-medium">
                     An interactive timeline of my professional experience, personal aspirations, and community impact. <br/>
-                    <span className="text-[#D95C14]">Scroll horizontally and click on any item to read the full story.</span>
+                    <span className="text-[#D95C14] mt-2 block">Scroll horizontally and click on any item to read the full story.</span>
                 </p>
+
+                <div className="flex flex-col items-center gap-4 mt-8">
+                  <div className="flex flex-wrap justify-center gap-2 md:gap-4" id="filter-buttons">
+                      {['All', 'Experience', 'Volunteer', 'Education', 'Creative'].map(cat => (
+                        <button 
+                          key={cat}
+                          onClick={() => handleFilter(cat)} 
+                          className={`filter-btn px-4 py-2 text-sm rounded-full transition-all duration-300 ${filter === cat ? 'bg-white text-[#D95C14] border border-[#EAE3D9] shadow-sm font-semibold' : 'bg-transparent text-[#5B487A] border border-transparent hover:text-[#D95C14] font-medium'}`}
+                        >
+                          {cat === 'All' ? 'All Experiences' : cat === 'Experience' ? 'Corporate Experience' : cat === 'Volunteer' ? 'Volunteering & Mentorship' : cat === 'Creative' ? 'Outdoors & Creative' : cat}
+                        </button>
+                      ))}
+                  </div>
+                  
+                  <div className={`transition-all duration-300 overflow-hidden ${expandedIds.size > 0 ? 'h-8 opacity-100 mt-2' : 'h-0 opacity-0 mt-0'}`}>
+                    <button 
+                      onClick={collapseAll}
+                      className="text-xs font-semibold text-[#D95C14] border border-[#D95C14] px-4 py-1.5 rounded-full hover:bg-[#D95C14] hover:text-white transition-colors"
+                    >
+                      Collapse All
+                    </button>
+                  </div>
+                </div>
             </div>
 
             <div className="hz-scroll-container w-full overflow-x-auto overflow-y-hidden pb-12 cursor-grab" id="horizontal-scroll">
@@ -543,14 +554,14 @@ export default function HumanSidePage({ onSwitchBack }: { onSwitchBack: () => vo
 
                                 <div className="flex justify-between items-center gap-2">
                                     <h3 className="text-base md:text-lg font-bold text-[#3B3155] leading-tight serif-font">{item.organization}</h3>
-                                    <div className="flex-shrink-0 text-[#D95C14] bg-[#FDFBF7] p-1.5 rounded-full border border-[#EAE3D9] transition-transform duration-300" style={{ transform: expandedId === item.id ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                                    <div className="flex-shrink-0 text-[#D95C14] bg-[#FDFBF7] p-1.5 rounded-full border border-[#EAE3D9] transition-transform duration-300" style={{ transform: expandedIds.has(item.id) ? 'rotate(180deg)' : 'rotate(0deg)' }}>
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
                                         </svg>
                                     </div>
                                 </div>
 
-                                <div className="overflow-hidden transition-all duration-500 ease-in-out" style={{ maxHeight: expandedId === item.id ? '1000px' : '0px', opacity: expandedId === item.id ? 1 : 0, marginTop: expandedId === item.id ? '1rem' : '0px' }}>
+                                <div className="overflow-hidden transition-all duration-500 ease-in-out" style={{ maxHeight: expandedIds.has(item.id) ? '1000px' : '0px', opacity: expandedIds.has(item.id) ? 1 : 0, marginTop: expandedIds.has(item.id) ? '1rem' : '0px' }}>
                                     <div className="pt-4 border-t border-[#EAE3D9] flex flex-col gap-3">
                                         <div>
                                             <h4 className="text-sm md:text-base font-bold text-[#2A2438]">{item.title}</h4>

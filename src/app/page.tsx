@@ -46,6 +46,7 @@ const stories = [
 
 export default function App() {
   const [isProfessionalView, setIsProfessionalView] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
 
   // Re-run intersection observer whenever the view changes
@@ -66,8 +67,13 @@ export default function App() {
   }, [isProfessionalView]);
 
   const toggleView = () => {
-    setIsProfessionalView(!isProfessionalView);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setIsProfessionalView(!isProfessionalView);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Short delay before fading back in
+      setTimeout(() => setIsTransitioning(false), 50);
+    }, 400); // Duration of fade out
   };
 
   const nextStory = () => {
@@ -79,11 +85,15 @@ export default function App() {
   };
 
   if (!isProfessionalView) {
-    return <HumanSidePage onSwitchBack={toggleView} />;
+    return (
+      <div className={`transition-opacity duration-500 ease-in-out ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
+        <HumanSidePage onSwitchBack={toggleView} />
+      </div>
+    );
   }
 
   return (
-    <div className="antialiased min-h-screen bg-[#0d1117] text-[#c9d1d9] font-sans selection:bg-blue-500/30">
+    <div className={`transition-opacity duration-500 ease-in-out ${isTransitioning ? 'opacity-0' : 'opacity-100'} antialiased min-h-screen bg-[#0d1117] text-[#c9d1d9] font-sans selection:bg-blue-500/30`}>
       <style>{`
         body { font-family: 'Inter', sans-serif; background-color: #0d1117; color: #c9d1d9; }
         .hero-gradient-bg { background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0d1117 100%); position: relative; overflow: hidden; }
