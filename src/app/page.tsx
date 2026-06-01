@@ -1,488 +1,608 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { Bookmark, ChevronLeft, ChevronRight, Briefcase } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-// --- STORY DATA ---
-const stories = [
+// Register ScrollTrigger safely
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+const journeyData = [
   {
-    id: 1,
-    label: "Event Snapshot — Age 9",
-    title: "Geometry Crowd",
-    subtitle: "The legacy of a family of ten.",
-    content: `Growing up in a family of 10 I always think of my family as inferior. Well the perception is if you coming from a low income household you have a lots of siblings. Im the second youngest among them. and being among the youngest you carry the legacy of the family. Yup I mean the school uniform from my brother, his bag his pants some of his old unuse book. Sometimes theres a side of me that feel small when its the beginning of the year and other people shirt are much whiter, cleaner, newer compared to mine that feels like it has been passed down for generation. Since that my gap with my elders sister in the family quite far the responsibility to teach fall on their lapse to teach me. Oh boy yup they definitely beat the hell out of me. My sisters are so scary. I still remember when I was 9 years old Ill go to school bringing the homework that she gave to me instead of me bringing school from work. Thats how scary she is. But again its all for the best of my growth. though i believe she could be nicer.`,
-    illustration: (
-      <svg viewBox="0 0 400 300" className="w-full h-full max-w-md mx-auto drop-shadow-2xl" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M50 150C50 94.7715 94.7715 50 150 50H250C305.228 50 350 94.7715 350 150C350 205.228 305.228 250 250 250H150C94.7715 250 50 205.228 50 150Z" fill="#FFF0E5" opacity="0.1"/>
-        <rect x="120" y="200" width="160" height="30" rx="4" fill="#4B5563" stroke="#9CA3AF" strokeWidth="2" strokeLinejoin="round"/>
-        <rect x="130" y="170" width="140" height="30" rx="4" fill="#374151" stroke="#9CA3AF" strokeWidth="2" strokeLinejoin="round"/>
-        <rect x="140" y="140" width="130" height="30" rx="4" fill="#1F2937" stroke="#9CA3AF" strokeWidth="2" strokeLinejoin="round"/>
-        <path d="M100 230V150C100 127.909 117.909 110 140 110H170C192.091 110 210 127.909 210 150V230" fill="#059669" stroke="#34D399" strokeWidth="2" strokeLinejoin="round"/>
-        <path d="M110 170H200V230H110V170Z" fill="#10B981" stroke="#34D399" strokeWidth="2" strokeLinejoin="round"/>
-        <circle cx="155" cy="200" r="10" fill="#F59E0B" stroke="#FCD34D" strokeWidth="2"/>
-        <path d="M140 110V90C140 84.4772 144.477 80 150 80H160C165.523 80 170 84.4772 170 90V110" stroke="#34D399" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    )
+      id: 'bsn',
+      date: 'Dec 2025 - Present',
+      title: 'Performance Management Executive',
+      organization: 'Bank Simpanan Nasional',
+      category: 'Experience',
+      typeClass: 'tag-experience',
+      shortDesc: 'Applying behavioral psychology to organizational performance and fair governance.',
+      image: null,
+      fullContent: `
+          <ul class="list-disc pl-4 space-y-2 text-[#4A4159]">
+              <li><strong>Digital Transformation:</strong> Developed and launched the LES 360 digital report by embedding the Korn Ferry framework into an automated reporting system.</li>
+              <li><strong>Workforce Scarcity Analysis:</strong> Built comprehensive dashboards to visualize workforce scarcity, enabling data-driven strategic planning for future hiring needs.</li>
+              <li><strong>Performance Governance:</strong> Led an investigation into performance rating inconsistencies, adjusting governance to ensure appraisal objectivity and fairness.</li>
+          </ul>
+      `
   },
   {
-    id: 2,
-    label: "Event Snapshot — Ages 12 to 17",
-    title: "The Unmapped Design",
-    subtitle: "The odd one out.",
-    content: `My family most of them are a scholar they have always been very good academically and are outstanding performer at school. Im the odd one. I like sports and am very good at it. I represent my state when I was 12, 15 and 17 year old, but yet again it never a litmus test for my family because in my family you can win an olympic great makesure you pack your bag for school tomorrow. At times I felt jealous looking at other of my teammates having their parent come and support them while me just astray. But again its a big family what can I expect. When I joined boarding school I lost half of me and I started to have a fixed mindset about where I truly belonged. It was a period of rebellion, quiet observation, and slowly realizing that my unique path didn't have to mirror theirs to be valid. Sports taught me resilience, a trait that would later fuel my dive into the complexities of human capital.`,
-    illustration: (
-      <svg viewBox="0 0 400 300" className="w-full h-full max-w-md mx-auto drop-shadow-2xl" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M350 150C350 205.228 305.228 250 250 250H150C94.7715 250 50 205.228 50 150C50 94.7715 94.7715 50 150 50H250C305.228 50 350 94.7715 350 150Z" fill="#E0F2FE" opacity="0.1"/>
-        <circle cx="200" cy="150" r="60" fill="#0284C7" stroke="#7DD3FC" strokeWidth="2"/>
-        <path d="M160 110C160 110 180 90 240 110C300 130 260 190 260 190C260 190 240 210 180 190C120 170 160 110 160 110Z" stroke="#BAE6FD" strokeWidth="4" strokeLinecap="round" strokeDasharray="8 8"/>
-        <circle cx="200" cy="150" r="20" fill="#38BDF8" />
-        <path d="M120 220L150 180" stroke="#7DD3FC" strokeWidth="6" strokeLinecap="round"/>
-        <path d="M280 80L250 120" stroke="#7DD3FC" strokeWidth="6" strokeLinecap="round"/>
-      </svg>
-    )
+      id: 'khazanah',
+      date: 'Oct 2024 - Sep 2025',
+      title: 'Analyst, Strategic Human Capital',
+      organization: 'Khazanah Nasional Berhad',
+      category: 'Experience',
+      typeClass: 'tag-experience',
+      shortDesc: 'Connecting data points to understand employee well-being and growth.',
+      image: null,
+      fullContent: `
+          <ul class="list-disc pl-4 space-y-2 text-[#4A4159]">
+              <li><strong>People Analytics Dashboard:</strong> Designed a Power BI dashboard processing HRIS data to visualize key metrics in real-time.</li>
+              <li><strong>Global Talent Acquisition:</strong> Screened over 4,000 applicants for the US & UK Global Graduate Recruitment.</li>
+              <li><strong>Community Building in Office:</strong> Spearheaded the Khazanah HR Network Event 2025 to create a platform for HR leaders to share industry best practices.</li>
+          </ul>
+      `
+  },
+  {
+      id: 'professional-speaking',
+      date: 'Ongoing',
+      title: 'Academic Presenter & Speaker',
+      organization: 'Academic Conferences & Forums',
+      category: 'Experience',
+      typeClass: 'tag-experience',
+      shortDesc: 'Sharing psychological insights and research findings with international audiences.',
+      image: null,
+      fullContent: `
+          <p class="text-[#4A4159] leading-relaxed mb-3">
+              Translating complex psychological data into compelling narratives is a core skill in People Analytics. Presenting at these forums hones my ability to communicate strategic insights effectively to diverse stakeholders.
+          </p>
+          <ul class="list-disc pl-4 space-y-2 text-[#4A4159]">
+              <li><strong>Speaker, UTM:</strong> Delivered insights at the Psychology Forum at Universiti Teknologi Malaysia.</li>
+              <li><strong>Presenter, Leeds:</strong> Shared research and perspectives at the Leeds Religion Conference in the UK.</li>
+              <li><strong>Presenter, Indonesia:</strong> Presented academic findings at the Psychology Indonesia Conference.</li>
+          </ul>
+      `
+  },
+  {
+      id: 'teaching',
+      date: 'Ongoing Initiative',
+      title: 'Applied Psychology Educator',
+      organization: 'Teaching & Therapy Initiatives',
+      category: 'Volunteer',
+      typeClass: 'tag-volunteer',
+      shortDesc: 'Bridging academic psychology with real-world developmental support.',
+      image: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      fullContent: `
+          <p class="text-[#4A4159] leading-relaxed mb-3">
+              Since both my BSc and MSc are in Psychology, I am deeply involved in activities revolving around human development. Teaching requires constant recalibration; adjusting delivery based on a child's unique profile directly influences how I approach talent development and behavioral assessment in the corporate world.
+          </p>
+          <ul class="list-disc pl-4 space-y-2 text-[#4A4159]">
+              <li><strong>ABA Therapist:</strong> Applying applied behavior analysis principles to support developmental growth.</li>
+              <li><strong>Buddy Bear:</strong> Providing Psychological First Aid (PFA) to children in distress.</li>
+              <li><strong>Buku Jalanan Chowkit:</strong> Facilitating education and mentorship for underserved youth.</li>
+              <li><strong>Kelas Rimba:</strong> Engaging in nature-based learning and forest schooling.</li>
+          </ul>
+      `
+  },
+  {
+      id: 'volunteering',
+      date: 'Ongoing Initiative',
+      title: 'Grassroots Community Server',
+      organization: 'Grassroots Community NGOs',
+      category: 'Volunteer',
+      typeClass: 'tag-volunteer',
+      shortDesc: 'Grounding empathy and understanding systemic human challenges at the grassroots level.',
+      image: 'https://images.unsplash.com/photo-1593113565637-51852b666fba?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      fullContent: `
+          <p class="text-[#4A4159] leading-relaxed mb-3">
+              In high-paced corporate environments, it is easy to view people merely as data points. Immersing myself in grassroots initiatives keeps my empathy grounded. It reminds me that behind every organizational dynamic are real people with complex needs, training me to design HR solutions that resonate with the human element.
+          </p>
+          <ul class="list-disc pl-4 space-y-2 text-[#4A4159]">
+              <li><strong>Dapur Jalanan Chowkit:</strong> Regular community feeding and social support.</li>
+              <li><strong>Buku Jalanan Chowkit:</strong> Supporting continuous community education.</li>
+              <li><strong>KVN Beach Clean-Up:</strong> Environmental conservation advocacy.</li>
+              <li><strong>Hutan Negara (Negros):</strong> Forest conservation and ecological volunteering.</li>
+          </ul>
+      `
+  },
+  {
+      id: 'lancaster',
+      date: 'Oct 2022 - Sept 2023',
+      title: 'M.Sc Developmental Psychology',
+      organization: 'Lancaster University',
+      category: 'Education',
+      typeClass: 'tag-education',
+      shortDesc: 'Deep diving into the cognitive mechanisms of human development.',
+      image: null,
+      fullContent: `
+          <p class="mb-2"><strong>Awards:</strong> Received fully funded scholarship from Malaysia Graduate Record Excellence Program (GRE-2022).</p>
+          <p><strong>Core Focus:</strong> Beyond just data analytics, this degree allowed me to deeply understand *why* people behave the way they do, bridging the gap between statistical outputs and actual human emotions.</p>
+      `
+  },
+  {
+      id: 'outdoors',
+      date: 'Whenever Possible',
+      title: 'Visual Storytelling & The Outdoors',
+      organization: 'Personal Pursuits',
+      category: 'Creative',
+      typeClass: 'tag-experience',
+      shortDesc: 'Finding the unseen narrative through observation, patience, and a different lens.',
+      image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      fullContent: `
+          <p class="text-[#4A4159] leading-relaxed">
+              Photography is essentially the art of observation—knowing where to look, waiting for the right moment, and capturing a story others might walk past. I apply this exact same lens to people analytics. Whether I am framing a landscape during a hike or analyzing a decade of employee data, the goal is the same: to cut through the noise, identify underlying patterns, and bring the true narrative into focus.
+          </p>
+      `
   }
 ];
 
-export default function App() {
-  const [isProfessionalView, setIsProfessionalView] = useState(true);
-  const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
+export default function HumanSidePage() {
+  const [filter, setFilter] = useState('All');
+  const [expandedId, setExpandedId] = useState<string | null>(null);
 
-  // Re-run intersection observer whenever the view changes
+  const containerRef = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
+  const swirlBaseRef = useRef<SVGPathElement>(null);
+  const swirlAnimRef = useRef<SVGPathElement>(null);
+  
+  // Create refs for each timeline item to calculate positions
+  const itemRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+
+  // Setup GSAP
   useEffect(() => {
-    if (isProfessionalView) {
-      const animatedElements = document.querySelectorAll('.fade-in-up');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-          }
+    if (typeof window === 'undefined') return;
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline();
+      tl.from(".hero-anim", { y: -20, opacity: 0, duration: 1, stagger: 0.2, ease: "power3.out", delay: 0.2 })
+        .from(".hero-text", { y: 30, opacity: 0, duration: 1.2, stagger: 0.2, ease: "power3.out" }, "-=0.6");
+
+      gsap.utils.toArray('.gs-reveal').forEach((elem: any) => {
+        ScrollTrigger.create({
+          trigger: elem,
+          start: "top 85%",
+          onEnter: () => gsap.fromTo(elem, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power3.out" }),
+          once: true
         });
-      }, { threshold: 0.1 });
-      
-      animatedElements.forEach(el => observer.observe(el));
-      return () => animatedElements.forEach(el => observer.unobserve(el));
+      });
+
+      ScrollTrigger.create({
+        trigger: "#journey",
+        start: "top 75%",
+        onEnter: () => {
+          (window as any).swirlHasAnimated = true;
+          if (swirlAnimRef.current) {
+            gsap.to(swirlAnimRef.current, { strokeDashoffset: 0, duration: 3.5, ease: "power2.inOut" });
+          }
+        },
+        once: true
+      });
+
+      gsap.to("#landscape-bg", {
+        y: -50,
+        ease: "none",
+        scrollTrigger: {
+          trigger: "#journey",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true
+        }
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  // Compute SVG Swirl Path
+  const drawSwirl = () => {
+    if (!svgRef.current || !swirlBaseRef.current || !swirlAnimRef.current) return;
+    const container = document.getElementById('timeline-content');
+    if (!container) return;
+
+    // Filter to only visible items in DOM
+    const visibleItems = journeyData.filter(item => {
+       const isVisible = filter === 'All' || item.category === filter || (filter === 'Volunteer' && item.category === 'Mentorship');
+       return isVisible;
+    });
+
+    let pathD = "";
+
+    visibleItems.forEach((item, index) => {
+      const domEl = itemRefs.current[item.id];
+      if (!domEl) return;
+      const dot = domEl.querySelector('.dot-element') as HTMLElement;
+      if (!dot) return;
+
+      const x = domEl.offsetLeft + dot.offsetLeft + (dot.offsetWidth / 2);
+      const y = domEl.offsetTop + dot.offsetTop + (dot.offsetHeight / 2);
+
+      if (index === 0) {
+        pathD += `M ${Math.max(0, x - 100)} ${y} L ${x} ${y} `;
+      } else {
+        const prevItem = visibleItems[index - 1];
+        const prevDomEl = itemRefs.current[prevItem.id];
+        if (prevDomEl) {
+          const prevDot = prevDomEl.querySelector('.dot-element') as HTMLElement;
+          if (prevDot) {
+            const prevX = prevDomEl.offsetLeft + prevDot.offsetLeft + (prevDot.offsetWidth / 2);
+            const prevY = prevDomEl.offsetTop + prevDot.offsetTop + (prevDot.offsetHeight / 2);
+
+            const controlX1 = prevX + (x - prevX) / 2;
+            const controlX2 = prevX + (x - prevX) / 2;
+
+            pathD += `C ${controlX1} ${prevY}, ${controlX2} ${y}, ${x} ${y} `;
+          }
+        }
+      }
+
+      if (index === visibleItems.length - 1) {
+        pathD += `L ${x + 200} ${y}`;
+      }
+    });
+
+    if (visibleItems.length === 0) pathD = "M 0 0";
+
+    svgRef.current.style.width = container.scrollWidth + 200 + 'px';
+    svgRef.current.style.height = Math.max(container.scrollHeight, 500) + 'px';
+
+    swirlBaseRef.current.setAttribute('d', pathD);
+    swirlAnimRef.current.setAttribute('d', pathD);
+
+    const length = swirlAnimRef.current.getTotalLength();
+    swirlAnimRef.current.style.strokeDasharray = `${length}`;
+
+    if ((window as any).swirlHasAnimated) {
+      swirlAnimRef.current.style.strokeDashoffset = '0';
+    } else {
+      swirlAnimRef.current.style.strokeDashoffset = `${length}`;
     }
-  }, [isProfessionalView]);
-
-  const toggleView = () => {
-    setIsProfessionalView(!isProfessionalView);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const nextStory = () => {
-    setCurrentStoryIndex((prev) => (prev + 1) % stories.length);
+  // Re-draw on resize or state change
+  useEffect(() => {
+    window.addEventListener('resize', drawSwirl);
+    setTimeout(drawSwirl, 100);
+    return () => window.removeEventListener('resize', drawSwirl);
+  }, []);
+
+  useEffect(() => {
+    setTimeout(drawSwirl, 100);
+    if (expandedId !== null) {
+      setTimeout(drawSwirl, 550); // wait for accordion animation
+    }
+  }, [filter, expandedId]);
+
+  // Drag to scroll
+  useEffect(() => {
+    const slider = document.getElementById('horizontal-scroll');
+    if (!slider) return;
+    let isDown = false;
+    let startX: number;
+    let scrollLeft: number;
+
+    const onMouseDown = (e: MouseEvent) => {
+      if ((e.target as HTMLElement).closest('.timeline-item-hz')) return;
+      isDown = true;
+      slider.classList.add('cursor-grabbing');
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    };
+    const onMouseLeave = () => { isDown = false; slider.classList.remove('cursor-grabbing'); };
+    const onMouseUp = () => { isDown = false; slider.classList.remove('cursor-grabbing'); };
+    const onMouseMove = (e: MouseEvent) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.offsetLeft;
+      slider.scrollLeft = scrollLeft - ((x - startX) * 1.5);
+    };
+
+    slider.addEventListener('mousedown', onMouseDown);
+    slider.addEventListener('mouseleave', onMouseLeave);
+    slider.addEventListener('mouseup', onMouseUp);
+    slider.addEventListener('mousemove', onMouseMove);
+
+    return () => {
+      slider.removeEventListener('mousedown', onMouseDown);
+      slider.removeEventListener('mouseleave', onMouseLeave);
+      slider.removeEventListener('mouseup', onMouseUp);
+      slider.removeEventListener('mousemove', onMouseMove);
+    };
+  }, []);
+
+  const toggleAccordion = (id: string) => {
+    setExpandedId(prev => (prev === id ? null : id));
   };
 
-  const prevStory = () => {
-    setCurrentStoryIndex((prev) => (prev === 0 ? stories.length - 1 : prev - 1));
+  const handleFilter = (category: string) => {
+    setExpandedId(null);
+    setFilter(category);
+    const slider = document.getElementById('horizontal-scroll');
+    if (slider) slider.scrollTo({ left: 0, behavior: 'smooth' });
+    const journeyEl = document.getElementById('journey');
+    if (journeyEl) journeyEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
+
+  // Calculate visible items to apply stagger
+  let visibleCount = 0;
 
   return (
-    <div className="antialiased min-h-screen bg-[#0d1117] text-[#c9d1d9] font-sans selection:bg-blue-500/30">
-      <style>{`
-        body { font-family: 'Inter', sans-serif; background-color: #0d1117; color: #c9d1d9; }
-        .hero-gradient-bg { background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0d1117 100%); position: relative; overflow: hidden; }
-        .animated-grid {
-          position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-          background-image: linear-gradient(to right, rgba(38, 50, 56, 0.3) 1px, transparent 1px),
-                            linear-gradient(to bottom, rgba(38, 50, 56, 0.3) 1px, transparent 1px);
-          background-size: 40px 40px; animation: pan-grid 20s linear infinite;
+    <div ref={containerRef} className="antialiased overflow-x-hidden" style={{ fontFamily: "'Nunito', sans-serif", backgroundColor: "var(--color-cream)", color: "var(--color-dark)", scrollBehavior: "smooth" }}>
+      <style dangerouslySetInnerHTML={{__html: `
+        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Nunito:wght@300;400;600;700&display=swap');
+        
+        :root {
+            --color-purple: #3B3155;
+            --color-orange: #D95C14;
+            --color-yellow: #F2A65A;
+            --color-cream: #FDFBF7;
+            --color-dark: #2A2438;
         }
-        @keyframes pan-grid { 0% { background-position: 0 0; } 100% { background-position: 40px 40px; } }
-        .section-title { color: #58a6ff; }
-        .card { background-color: #161b22; border: 1px solid #30363d; transition: transform 0.3s ease, border-color 0.3s ease; }
-        .card:hover { transform: translateY(-5px); border-color: #58a6ff; }
-        .btn-primary { background-color: #238636; color: #ffffff; transition: background-color 0.3s ease; }
-        .btn-primary:hover { background-color: #2ea043; }
-        .fade-in-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-        .fade-in-up.is-visible { opacity: 1; transform: translateY(0); }
-        .story-bg { background: radial-gradient(circle at center, #1f2937 0%, #0d1117 100%); }
-      `}</style>
 
-      {/* --- HEADER --- */}
-      <header className="bg-black/40 backdrop-blur-md fixed top-0 left-0 right-0 z-50 border-b border-gray-800">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="text-xl font-bold text-white tracking-wider">HUZAIFAH ADAM</div>
-            
-            <div className="flex items-center space-x-6">
-              {/* Navigation only visible on Professional Side */}
-              {isProfessionalView && (
-                <nav className="hidden md:flex items-center space-x-6">
-                  <a href="#statement" className="text-gray-400 hover:text-white transition-colors text-sm font-medium">Statement</a>
-                  <a href="#portfolio" className="text-gray-400 hover:text-white transition-colors text-sm font-medium">Portfolio</a>
-                  <a href="#skills" className="text-gray-400 hover:text-white transition-colors text-sm font-medium">Skills</a>
-                </nav>
-              )}
+        .serif-font { font-family: 'Lora', serif; }
 
-              {/* The "Clicker" Toggle Button */}
-              <button 
-                onClick={toggleView}
-                className={`flex items-center space-x-2 px-5 py-2.5 rounded-full text-sm font-bold transition-all duration-300 shadow-lg ${
-                  isProfessionalView 
-                  ? "bg-[#FDFBF7] text-gray-900 hover:bg-white border border-gray-200" 
-                  : "bg-[#161b22] text-white hover:bg-[#21262d] border border-gray-700"
-                }`}
-              >
-                {isProfessionalView ? (
-                  <span>The human side of me</span>
-                ) : (
-                  <>
-                    <Briefcase size={16} />
-                    <span>Return to Professional</span>
-                  </>
-                )}
-              </button>
-            </div>
+        .hero-section {
+            background-image: linear-gradient(rgba(59, 49, 85, 0.4), rgba(217, 92, 20, 0.6)), url('https://images.unsplash.com/photo-1542224566-6e85f2e6772f?auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .brand-box {
+            background-color: var(--color-cream);
+            color: var(--color-purple);
+            padding: 10px 16px;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: 0.02em;
+            border-radius: 8px;
+            box-shadow: 0 4px 14px rgba(59, 49, 85, 0.15);
+        }
+
+        .category-tag {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+        .tag-experience { background-color: #EFE9F4; color: #5B487A; } 
+        .tag-education { background-color: #FDF0E6; color: #B3480B; }  
+        .tag-volunteer { background-color: #F9F2D4; color: #8C6214; }  
+
+        .hz-scroll-container {
+            scrollbar-width: thin;
+            scrollbar-color: var(--color-orange) #EAE3D9;
+        }
+        .hz-scroll-container::-webkit-scrollbar { height: 8px; }
+        .hz-scroll-container::-webkit-scrollbar-track { background: #EAE3D9; border-radius: 4px; }
+        .hz-scroll-container::-webkit-scrollbar-thumb { background: var(--color-orange); border-radius: 4px; }
+        .cursor-grabbing { cursor: grabbing !important; }
+        
+        .warm-shadow {
+            box-shadow: 0 10px 30px rgba(217, 92, 20, 0.08);
+        }
+
+        @keyframes drift {
+            0% { transform: translateY(-5%) rotate(0deg) translateX(0); opacity: 0; }
+            10% { opacity: 0.8; }
+            50% { transform: translateY(50vh) rotate(180deg) translateX(20px); }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(100vh) rotate(360deg) translateX(-20px); opacity: 0; }
+        }
+        .leaf {
+            position: absolute;
+            top: -20px;
+            z-index: 0;
+            animation: drift linear infinite;
+            color: var(--color-orange);
+            opacity: 0.5;
+        }
+        .leaf:nth-child(1) { left: 10%; animation-duration: 12s; animation-delay: 0s; font-size: 24px; color: var(--color-yellow); }
+        .leaf:nth-child(2) { left: 85%; animation-duration: 15s; animation-delay: 2s; font-size: 32px; }
+        .leaf:nth-child(3) { left: 50%; animation-duration: 18s; animation-delay: 5s; font-size: 20px; color: var(--color-purple); opacity: 0.2; }
+      `}} />
+
+      {/* Hero Section */}
+      <header className="hero-section h-screen w-full relative flex flex-col items-center justify-center text-white">
+        {/* Navigation */}
+        <nav className="absolute top-0 w-full p-6 md:p-10 flex justify-between items-center z-50">
+          <div className="brand-box text-sm hero-anim serif-font">
+            Huzaifah<br/>Adam
           </div>
+          
+          <div className="hero-anim flex items-center gap-3 bg-[#3B3155]/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 shadow-lg">
+            <span className="text-[#FDFBF7] text-xs md:text-sm font-semibold tracking-wide">The Human Side</span>
+            <a href="http://nomad-ai.my/" title="Switch back to Data Analytics Portfolio" className="group flex items-center cursor-pointer">
+                <div className="w-11 h-6 bg-[#D95C14] rounded-full relative shadow-inner border border-black/10 transition-colors duration-300 group-hover:bg-[#F2A65A]">
+                    <div className="absolute right-1 top-[3px] w-4 h-4 bg-white rounded-full shadow-sm transition-transform duration-300 group-hover:scale-90"></div>
+                </div>
+            </a>
+          </div>
+        </nav>
+
+        {/* Center Content */}
+        <div className="text-center z-10 w-full px-4 mt-[-5vh]">
+          <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-medium tracking-tight mb-6 drop-shadow-lg hero-text serif-font text-[#FDFBF7]">
+            Beyond the Data
+          </h1>
+          <p className="text-lg md:text-2xl font-light mb-10 drop-shadow-md hero-text opacity-95 max-w-3xl mx-auto text-[#FDF0E6]">
+            Bridging psychological theory with community impact, personal growth, and the human element.
+          </p>
+          <a href="#about" className="bg-[#FDFBF7] text-[#3B3155] flex justify-between items-center px-5 py-3 w-full max-w-[320px] mx-auto cursor-pointer hover:bg-[#D95C14] hover:text-white transition-all duration-300 hero-text shadow-xl rounded-full group font-semibold">
+            <span>Explore My Story</span>
+            <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#3B3155] group-hover:bg-white transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-white group-hover:text-[#D95C14]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7" /></svg>
+            </span>
+          </a>
         </div>
       </header>
 
-      <main className="pt-20">
-        {/* --- CONDITIONAL RENDERING: PROFESSIONAL VS PERSONAL --- */}
-        {isProfessionalView ? (
-          <div className="animate-in fade-in duration-700">
-            {/* Hero Section */}
-            <section className="hero-gradient-bg pt-32 pb-24 text-white">
-                <div className="animated-grid"></div>
-                <div className="container mx-auto px-6 text-center relative z-10">
-                    <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-4 tracking-tight">Leveraging Data Analytics to Drive <br className="hidden md:block"/>Strategic Human Capital Outcomes</h1>
-                    <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-10 font-light">
-                        I transform complex data into clear, actionable strategies that drive organizational growth and empower people.
-                    </p>
-                    <a href="#portfolio" className="btn-primary font-bold px-8 py-3.5 rounded-lg text-lg inline-block shadow-lg shadow-green-900/20">
-                        View My Work
-                    </a>
-                </div>
-            </section>
+      {/* Narrative Section */}
+      <section id="about" className="py-24 px-6 md:px-20 max-w-7xl mx-auto relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+            <div className="leaf">🍂</div>
+            <div className="leaf">🍁</div>
+            <div className="leaf">🍂</div>
+        </div>
 
-            {/* Professional Statement Section */}
-            <section id="statement" className="py-20 md:py-28 bg-[#0d1117]">
-                <div className="container mx-auto px-6">
-                    <div className="fade-in-up max-w-5xl mx-auto grid md:grid-cols-3 gap-12 items-center">
-                        <div className="md:col-span-1">
-                            <img src="https://i.postimg.cc/pLgrB8xm/Screenshot-2025-11-07-at-12-05-06-PM.png" alt="Huzaifah Adam" className="rounded-full border-4 border-gray-800 shadow-2xl w-64 h-64 object-cover mx-auto md:mx-0" />
-                        </div>
-                        <div className="md:col-span-2">
-                            <h2 className="section-title text-sm font-bold tracking-widest uppercase mb-4">PROFESSIONAL STATEMENT</h2>
-                            <blockquote className="text-2xl md:text-3xl font-light text-white leading-relaxed border-l-4 border-blue-500 pl-6 italic">
-                                "I am driven by the intersection of data and human psychology, transforming complex information into clear, actionable strategies that empower organizations and their people."
-                            </blockquote>
-                            <p className="mt-8 text-lg font-bold text-white">Huzaifah Adam</p>
-                            <p className="text-gray-400">Strategic Analyst, advising on human capital initiatives at Khazanah Nasional Berhad.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Core Competencies Section */}
-            <section className="py-20 md:py-28 bg-[#161b22]">
-                <div className="container mx-auto px-6">
-                    <div className="text-center mb-16">
-                        <h2 className="section-title text-sm font-bold tracking-widest uppercase mb-4 fade-in-up">Core Competencies</h2>
-                        <p className="text-3xl md:text-4xl font-bold text-white max-w-3xl mx-auto fade-in-up" style={{transitionDelay: '100ms'}}>My expertise lies at the intersection of strategy, data, and people.</p>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                        <div className="card p-8 rounded-xl fade-in-up" style={{transitionDelay: '200ms'}}>
-                            <div className="bg-blue-500/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-blue-500">
-                                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                            </div>
-                            <h3 className="text-xl font-bold text-white mb-3">HR Strategy & Transformation</h3>
-                            <p className="text-gray-400 text-sm leading-relaxed">Developing and implementing talent frameworks and process improvements that align with strategic business goals.</p>
-                        </div>
-                        <div className="card p-8 rounded-xl fade-in-up" style={{transitionDelay: '300ms'}}>
-                            <div className="bg-green-500/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-green-500">
-                                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-                            </div>
-                            <h3 className="text-xl font-bold text-white mb-3">Data-Driven Advisory</h3>
-                            <p className="text-gray-400 text-sm leading-relaxed">Utilizing quantitative and qualitative data to provide leadership with tangible arguments for evidence-based decisions.</p>
-                        </div>
-                        <div className="card p-8 rounded-xl fade-in-up" style={{transitionDelay: '400ms'}}>
-                            <div className="bg-purple-500/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-purple-500">
-                                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                            </div>
-                            <h3 className="text-xl font-bold text-white mb-3">Stakeholder Management</h3>
-                            <p className="text-gray-400 text-sm leading-relaxed">Leading cross-functional initiatives and managing high-stakes events to ensure alignment with all stakeholders.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            {/* Portfolio Section */}
-            <section id="portfolio" className="py-20 md:py-28 bg-[#0d1117]">
-                <div className="container mx-auto px-6">
-                    <div className="text-center mb-16">
-                        <h2 className="section-title text-sm font-bold tracking-widest uppercase mb-4 fade-in-up">Portfolio Highlights</h2>
-                        <p className="text-3xl md:text-4xl font-bold text-white max-w-2xl mx-auto fade-in-up" style={{transitionDelay: '100ms'}}>Selected case studies of my work.</p>
-                    </div>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        {/* Project 1 */}
-                        <div className="card p-8 rounded-2xl flex flex-col fade-in-up">
-                            <div className="flex-grow">
-                                <p className="text-blue-400 font-semibold text-sm tracking-wide">Case Study 1</p>
-                                <h3 className="text-2xl md:text-3xl font-bold text-white mt-3 mb-4 leading-snug">A Data-Driven Proposal to Increase Program ROI by Shifting Recruitment Focus.</h3>
-                                <p className="text-gray-400">Strategic Review of a Graduate Trainee Program.</p>
-                            </div>
-                            <div className="mt-8">
-                                <div className="flex flex-wrap gap-2 mb-6">
-                                    <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Data Analysis</span>
-                                    <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Change Management</span>
-                                </div>
-                                <a href="https://casestudyone-sanitized.pages.dev/Case%20study%201%20(sanitized)" target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-semibold text-blue-400 hover:text-blue-300 transition-colors">
-                                  View Case Study <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                                </a>
-                            </div>
-                        </div>
-                        {/* Project 2 */}
-                        <div className="card p-8 rounded-2xl flex flex-col fade-in-up" style={{transitionDelay: '100ms'}}>
-                            <div className="flex-grow">
-                                <p className="text-blue-400 font-semibold text-sm tracking-wide">Case Study 2</p>
-                                <h3 className="text-2xl md:text-3xl font-bold text-white mt-3 mb-4 leading-snug">Enhancing Success Rates of Locally-Trained Economics Graduates.</h3>
-                                <p className="text-gray-400">Strategic Review at a leading Malaysian GLIC.</p>
-                            </div>
-                            <div className="mt-8">
-                                 <div className="flex flex-wrap gap-2 mb-6">
-                                    <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Project Coordination</span>
-                                    <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Stakeholder Engagement</span>
-                                </div>
-                                <a href="https://casestudyone-sanitized.pages.dev/Case%20study%202%20(sanitized)" target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-semibold text-blue-400 hover:text-blue-300 transition-colors">
-                                  View Case Study <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                                </a>
-                            </div>
-                        </div>
-                        {/* Project 3 */}
-                        <div className="card p-8 rounded-2xl flex flex-col fade-in-up">
-                            <div className="flex-grow">
-                                <p className="text-blue-400 font-semibold text-sm tracking-wide">Case Study 3</p>
-                                <h3 className="text-2xl md:text-3xl font-bold text-white mt-3 mb-4 leading-snug">A Strategic Overhaul of a Premier Talent Retention Program.</h3>
-                                <p className="text-gray-400">Strategic Review of a Graduate Trainee Program.</p>
-                            </div>
-                            <div className="mt-8">
-                                 <div className="flex flex-wrap gap-2 mb-6">
-                                    <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Problem Solving</span>
-                                    <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Forward Thinking</span>
-                                </div>
-                                <a href="https://casestudyone-sanitized.pages.dev/Case%20study%203%20(sanitized)" target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-semibold text-blue-400 hover:text-blue-300 transition-colors">
-                                  View Case Study <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                                </a>
-                            </div>
-                        </div>
-                        {/* Project 4 */}
-                        <div className="card p-8 rounded-2xl flex flex-col fade-in-up" style={{transitionDelay: '100ms'}}>
-                            <div className="flex-grow">
-                                <p className="text-blue-400 font-semibold text-sm tracking-wide">Case Study 4</p>
-                                <h3 className="text-2xl md:text-3xl font-bold text-white mt-3 mb-4 leading-snug">Addressing Challenges on Domestic Talent Pipeline.</h3>
-                                <p className="text-gray-400">Strategic Review of a Graduate Trainee Program.</p>
-                            </div>
-                            <div className="mt-8">
-                                <div className="flex flex-wrap gap-2 mb-6">
-                                    <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Diversity</span>
-                                    <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Data Analytics</span>
-                                </div>
-                                <a href="https://casestudyone-sanitized.pages.dev/Case%20study%204%20(sanitized)" target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-semibold text-blue-400 hover:text-blue-300 transition-colors">
-                                  View Case Study <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Technical Proficiencies Section */}
-            <section id="skills" className="py-20 md:py-28 bg-[#161b22]">
-                <div className="container mx-auto px-6">
-                    <div className="text-center mb-16">
-                        <h2 className="section-title text-sm font-bold tracking-widest uppercase mb-4 fade-in-up">Technical Proficiencies</h2>
-                        <p className="text-3xl md:text-4xl font-bold text-white max-w-3xl mx-auto fade-in-up" style={{transitionDelay: '100ms'}}>Hands-on skills in data visualization and web development.</p>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div className="card rounded-2xl p-8 fade-in-up">
-                            <h3 className="text-2xl font-bold text-white mb-4 flex items-center">
-                              <svg className="w-6 h-6 mr-3 text-yellow-500" fill="currentColor" viewBox="0 0 24 24"><path d="M4 10h3v10H4V10zm5-5h3v15H9V5zm5 9h3v6h-3v-6zm5-4h3v10h-3v-10z"/></svg>
-                              Data Visualization (Power BI)
-                            </h3>
-                            <p className="text-gray-400 mb-6 leading-relaxed">I build intuitive dashboards to translate complex datasets into actionable insights. Below are samples from a training feedback survey I developed.</p>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                               <img src="https://i.postimg.cc/fS0x3mzp/Screenshot-2025-08-23-232004.png" alt="Power BI Dashboard 1" className="rounded-lg shadow-xl border border-gray-700 opacity-90 hover:opacity-100 transition-opacity cursor-zoom-in" />
-                               <img src="https://i.postimg.cc/SY7LYJnG/image-42ac08.png" alt="Power BI Dashboard Drill Down" className="rounded-lg shadow-xl border border-gray-700 opacity-90 hover:opacity-100 transition-opacity cursor-zoom-in" />
-                            </div>
-                        </div>
-                        <div className="card rounded-2xl p-8 fade-in-up">
-                            <h3 className="text-2xl font-bold text-white mb-4 flex items-center">
-                              <svg className="w-6 h-6 mr-3 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-                              Web Development (HTML/CSS)
-                            </h3>
-                            <p className="text-gray-400 mb-6 leading-relaxed">I create clean, professional, and responsive webpages for specific business needs, such as the event info deck shown below.</p>
-                            <a href="https://knbhrn2025.pages.dev/knbhrnetwork" target="_blank" rel="noopener noreferrer" className="block aspect-video bg-[#0d1117] rounded-xl p-4 border border-gray-700 hover:border-blue-500 transition-colors group">
-                                 <div className="bg-white rounded-md h-full w-full p-2 relative overflow-hidden">
-                                    <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors"></div>
-                                    <div className="flex items-center space-x-1.5 mb-3 px-1">
-                                        <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
-                                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
-                                        <div className="w-2.5 h-2.5 rounded-full bg-green-400"></div>
-                                    </div>
-                                    <div style={{backgroundColor: '#2B3889'}} className="h-6 w-full rounded-t-sm mb-2"></div>
-                                    <div className="bg-gray-100 h-16 w-3/4 rounded-sm mb-2"></div>
-                                    <div className="bg-gray-100 h-8 w-1/2 rounded-sm"></div>
-                                 </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Certificates Section */}
-            <section id="certificates" className="py-20 md:py-28 bg-[#0d1117]">
-                <div className="container mx-auto px-6">
-                    <div className="text-center mb-16">
-                        <h2 className="section-title text-sm font-bold tracking-widest uppercase mb-4 fade-in-up">Certificates & Credentials</h2>
-                        <p className="text-3xl md:text-4xl font-bold text-white max-w-3xl mx-auto fade-in-up" style={{transitionDelay: '100ms'}}>My certifications provide a unique ability to quantify business impact.</p>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {/* Certificate 1 */}
-                        <div className="card rounded-xl p-6 flex items-start space-x-4 fade-in-up" style={{transitionDelay: '200ms'}}>
-                            <div className="flex-shrink-0 text-green-400">
-                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zM9 12a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd" /><path d="M2 10a8 8 0 1116 0 8 8 0 01-16 0zm8-7a7 7 0 100 14 7 7 0 000-14z" /></svg>
-                            </div>
-                            <div>
-                                <h3 className="font-bold text-white text-lg">Financial Modeling</h3>
-                                <p className="text-gray-400 text-sm mt-1">Training The Street</p>
-                                <p className="text-xs text-gray-500 mt-2 font-mono">Issued Nov 2024</p>
-                            </div>
-                        </div>
-                         {/* Certificate 2 */}
-                        <div className="card rounded-xl p-6 flex items-start space-x-4 fade-in-up" style={{transitionDelay: '300ms'}}>
-                            <div className="flex-shrink-0 text-green-400">
-                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zM9 12a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd" /><path d="M2 10a8 8 0 1116 0 8 8 0 01-16 0zm8-7a7 7 0 100 14 7 7 0 000-14z" /></svg>
-                            </div>
-                            <div>
-                                <h3 className="font-bold text-white text-lg">Valuation</h3>
-                                <p className="text-gray-400 text-sm mt-1">Training The Street</p>
-                                <p className="text-xs text-gray-500 mt-2 font-mono">Issued Nov 2024</p>
-                            </div>
-                        </div>
-                         {/* Certificate 3 */}
-                        <div className="card rounded-xl p-6 flex items-start space-x-4 fade-in-up" style={{transitionDelay: '400ms'}}>
-                            <div className="flex-shrink-0 text-blue-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zM9 12a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd" /><path d="M2 10a8 8 0 1116 0 8 8 0 01-16 0zm8-7a7 7 0 100 14 7 7 0 000-14z" /></svg>
-                            </div>
-                            <div>
-                                <h3 className="font-bold text-white text-lg">Data-Driven Decisions</h3>
-                                <p className="text-gray-400 text-sm mt-1">Coursera</p>
-                                <p className="text-xs text-gray-500 mt-2 font-mono">Issued Aug 2022</p>
-                            </div>
-                        </div>
-                         {/* Certificate 4 */}
-                        <div className="card rounded-xl p-6 flex items-start space-x-4 fade-in-up" style={{transitionDelay: '500ms'}}>
-                            <div className="flex-shrink-0 text-blue-400">
-                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zM9 12a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd" /><path d="M2 10a8 8 0 1116 0 8 8 0 01-16 0zm8-7a7 7 0 100 14 7 7 0 000-14z" /></svg>
-                            </div>
-                            <div>
-                                <h3 className="font-bold text-white text-lg">Foundations: Data, Everywhere</h3>
-                                <p className="text-gray-400 text-sm mt-1">Coursera</p>
-                                <p className="text-xs text-gray-500 mt-2 font-mono">Issued Aug 2022</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Contact Section */}
-            <section id="contact" className="py-20 md:py-28 bg-[#0d1117] text-center border-t border-gray-800/50">
-                <div className="container mx-auto px-6 fade-in-up">
-                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Connect?</h2>
-                    <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-8">I am always open to discussing new opportunities and collaborations. Let's discuss how I can bring value to your team.</p>
-                    <a href="mailto:huzaifah.adam.98@gmail.com" className="btn-primary font-bold px-10 py-4 rounded-lg text-lg inline-block shadow-lg">
-                        Get In Touch
-                    </a>
-                </div>
-            </section>
-          </div>
-        ) : (
-          
-          /* --- PERSONAL STORIES VIEW (THE CLICKER) --- */
-          <div className="bg-[#FDFBF7] min-h-[90vh] py-16 px-4 flex items-center justify-center animate-in fade-in duration-700">
-            <div className="max-w-5xl w-full pt-10">
-              
-              <div className="text-center mb-12">
-                <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">
-                  The Human Side
-                </h2>
-                <p className="text-gray-500 mt-4 text-lg font-light max-w-2xl mx-auto">Stories that shaped the professional you see today.</p>
-              </div>
-
-              <div className="bg-white border border-gray-200 rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.05)] relative">
-                
-                {/* Carousel Controls */}
-                <button 
-                  onClick={prevStory}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-gray-50 text-gray-800 p-3 rounded-full transition-all border border-gray-200 shadow-md"
-                >
-                  <ChevronLeft size={24} />
-                </button>
-                <button 
-                  onClick={nextStory}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-gray-50 text-gray-800 p-3 rounded-full transition-all border border-gray-200 shadow-md"
-                >
-                  <ChevronRight size={24} />
-                </button>
-
-                <div className="grid md:grid-cols-2 gap-0 min-h-[500px]">
-                  {/* Text Content */}
-                  <div className="p-10 md:p-14 flex flex-col justify-center">
-                    <div className="flex items-center space-x-2 text-gray-400 mb-6 font-mono text-xs tracking-widest uppercase font-bold">
-                      <Bookmark size={16} />
-                      <span>{stories[currentStoryIndex].label}</span>
-                    </div>
-                    
-                    <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
-                      {stories[currentStoryIndex].title}
-                    </h3>
-                    
-                    <p className="text-xl text-gray-500 italic mb-8 border-l-4 border-gray-200 pl-4">
-                      {stories[currentStoryIndex].subtitle}
-                    </p>
-                    
-                    <p className="text-gray-700 leading-relaxed text-lg whitespace-pre-line font-light">
-                      {stories[currentStoryIndex].content}
-                    </p>
-                    
-                    {/* Dots indicator */}
-                    <div className="mt-12 flex space-x-3 items-center">
-                      {stories.map((_, idx) => (
-                        <div 
-                          key={idx}
-                          className={`h-2 rounded-full transition-all duration-300 ${idx === currentStoryIndex ? 'w-8 bg-gray-800' : 'w-2 bg-gray-200'}`}
-                        />
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Illustration Side */}
-                  <div className="bg-gray-50/50 p-10 flex items-center justify-center border-l border-gray-100">
-                    <div className="w-full h-full animate-in zoom-in duration-500" key={currentStoryIndex}>
-                      {stories[currentStoryIndex].illustration}
-                    </div>
-                  </div>
-                </div>
-
-              </div>
+        <div className="relative z-10 gs-reveal mb-16">
+            <h2 className="text-4xl mb-6 border-b-2 border-[#F2A65A]/30 pb-3 text-[#3B3155] serif-font max-w-max">Why This Page Exists</h2>
+            <div className="text-[#4A4159] leading-relaxed text-lg space-y-5 max-w-4xl">
+                <p>
+                    Is a traditional resume enough to showcase who I am? In the age of AI, I realized it's time to shift gears. During recent interviews, I noticed a distinct change: the focus has moved from purely technical assessments to the human element. Instead of just testing coding skills or statistical capabilities, recruiters are asking, <em>"What do you do in your spare time? What drives you?"</em>
+                </p>
+                <p>
+                    As AI seamlessly handles the heavy technical lifting, our unique human experiences become our true differentiators. The underlying message from modern organizations is clear: <strong>"We know you have the technical capabilities; now, tell us what makes you uniquely human."</strong>
+                </p>
+                <p>
+                    This realization inspired me to build this space. Here, I document not just my corporate milestones, but the community work, teaching, and outdoor adventures that shape my worldview outside the office. Welcome to the other side of my portfolio.
+                </p>
             </div>
-          </div>
-        )}
-      </main>
+        </div>
+
+        <div className="relative z-10 gs-reveal">
+            <div className="mb-6 border-b border-[#EAE3D9] pb-2 max-w-max">
+                <h2 className="text-2xl text-[#3B3155] serif-font">Filter My Journey</h2>
+            </div>
+            
+            <div className="flex flex-wrap gap-2 md:gap-4" id="filter-buttons">
+                {['All', 'Experience', 'Volunteer', 'Education', 'Creative'].map(cat => (
+                  <button 
+                    key={cat}
+                    onClick={() => handleFilter(cat)} 
+                    className={`filter-btn px-4 py-2 text-sm rounded-full transition-all duration-300 ${filter === cat ? 'bg-white text-[#D95C14] border border-[#EAE3D9] shadow-sm font-semibold' : 'bg-transparent text-[#5B487A] border border-transparent hover:text-[#D95C14] font-medium'}`}
+                  >
+                    {cat === 'All' ? 'All Experiences' : cat === 'Experience' ? 'Corporate Experience' : cat === 'Volunteer' ? 'Volunteering & Mentorship' : cat === 'Creative' ? 'Outdoors & Creative' : cat}
+                  </button>
+                ))}
+            </div>
+            
+            <svg className="absolute right-0 bottom-0 w-48 opacity-10 pointer-events-none" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+                <path d="M100 140 L100 80 M100 80 L70 120 M100 80 L130 110 M100 60 L80 90 M100 60 L120 85 M100 40 L90 60 M100 40 L110 55" stroke="#3B3155" strokeWidth="4" strokeLinecap="round" fill="none"/>
+                <circle cx="100" cy="50" r="40" fill="#D95C14" opacity="0.3"/>
+                <circle cx="80" cy="80" r="30" fill="#F2A65A" opacity="0.4"/>
+                <circle cx="120" cy="70" r="35" fill="#3B3155" opacity="0.2"/>
+            </svg>
+        </div>
+      </section>
+
+      {/* Journey Section */}
+      <section id="journey" className="py-24 px-4 md:px-10 bg-[#F4EFE6] overflow-hidden relative">
+        <div className="absolute bottom-0 left-0 w-full h-[60%] pointer-events-none opacity-30" id="landscape-bg">
+            <svg viewBox="0 0 1440 400" preserveAspectRatio="none" className="w-full h-full text-[#F2A65A]">
+                <path fill="currentColor" opacity="0.2" d="M0,300 C300,100 600,400 1000,200 C1200,100 1440,250 1440,250 L1440,400 L0,400 Z"></path>
+                <path fill="var(--color-orange)" opacity="0.15" d="M0,400 C200,250 500,250 800,350 C1100,450 1300,200 1440,280 L1440,400 L0,400 Z"></path>
+                <polygon points="150,300 130,350 170,350" fill="var(--color-purple)" opacity="0.4"/>
+                <polygon points="150,270 135,320 165,320" fill="var(--color-purple)" opacity="0.4"/>
+                <polygon points="850,250 820,320 880,320" fill="var(--color-orange)" opacity="0.3"/>
+                <polygon points="850,210 830,280 870,280" fill="var(--color-orange)" opacity="0.3"/>
+                <polygon points="1250,220 1230,280 1270,280" fill="currentColor" opacity="0.5"/>
+            </svg>
+        </div>
+
+        <div className="max-w-7xl mx-auto relative z-10">
+            <div className="text-center mb-16 gs-reveal">
+                <h2 className="text-4xl md:text-5xl text-[#3B3155] mb-4 serif-font">My Journey</h2>
+                <p className="text-[#5B487A] max-w-2xl mx-auto text-sm md:text-base font-medium">
+                    An interactive timeline of my professional experience, personal aspirations, and community impact. <br/>
+                    <span className="text-[#D95C14]">Scroll horizontally and click on any item to read the full story.</span>
+                </p>
+            </div>
+
+            <div className="hz-scroll-container w-full overflow-x-auto overflow-y-hidden pb-12 cursor-grab" id="horizontal-scroll">
+                <div id="timeline-content" className="relative z-10 flex flex-row gap-8 px-10 pt-[20px] min-w-max items-start h-auto min-h-[500px]">
+                    
+                    <svg id="horizontal-swirl" ref={svgRef} className="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
+                        <path id="swirl-base" ref={swirlBaseRef} fill="none" stroke="#EAE3D9" strokeWidth="3"></path>
+                        <path id="swirl-anim" ref={swirlAnimRef} fill="none" stroke="#D95C14" strokeWidth="4"></path>
+                    </svg>
+
+                    {journeyData.map((item) => {
+                      const isVisible = filter === 'All' || item.category === filter || (filter === 'Volunteer' && item.category === 'Mentorship');
+                      
+                      let staggerClass = "";
+                      if (isVisible) {
+                        staggerClass = visibleCount % 2 === 0 ? "mt-[20px]" : "mt-[100px]";
+                        visibleCount++;
+                      }
+
+                      return (
+                        <div 
+                          key={item.id}
+                          ref={el => { itemRefs.current[item.id] = el }}
+                          className={`timeline-item-hz relative flex flex-col items-center w-[260px] md:w-[300px] shrink-0 group ${staggerClass}`}
+                          style={{ display: isVisible ? 'flex' : 'none' }}
+                        >
+                            <div className="dot-element w-5 h-5 bg-[#F4EFE6] border-[3px] border-[#D95C14] rounded-full z-20 transition-all duration-300 group-hover:scale-125 group-hover:bg-[#D95C14] relative"></div>
+                            
+                            <div className="w-full bg-white relative z-10 mt-5 rounded-2xl p-4 md:p-5 border border-[#EAE3D9] warm-shadow transition-all cursor-pointer hover:-translate-y-1" onClick={() => toggleAccordion(item.id)}>
+                                
+                                <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-[2px] h-5 bg-[#EAE3D9] z-10 group-hover:bg-[#D95C14] transition-colors duration-300"></div>
+
+                                <div className="flex justify-between items-center gap-2">
+                                    <h3 className="text-base md:text-lg font-bold text-[#3B3155] leading-tight serif-font">{item.organization}</h3>
+                                    <div className="flex-shrink-0 text-[#D95C14] bg-[#FDFBF7] p-1.5 rounded-full border border-[#EAE3D9] transition-transform duration-300" style={{ transform: expandedId === item.id ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <div className="overflow-hidden transition-all duration-500 ease-in-out" style={{ maxHeight: expandedId === item.id ? '1000px' : '0px', opacity: expandedId === item.id ? 1 : 0, marginTop: expandedId === item.id ? '1rem' : '0px' }}>
+                                    <div className="pt-4 border-t border-[#EAE3D9] flex flex-col gap-3">
+                                        <div>
+                                            <h4 className="text-sm md:text-base font-bold text-[#2A2438]">{item.title}</h4>
+                                            <div className="flex flex-wrap items-center gap-2 mt-1.5">
+                                                <span className="text-[#D95C14] font-bold tracking-wide text-[0.65rem] md:text-xs uppercase">{item.date}</span>
+                                                <span className={`category-tag ${item.typeClass} !text-[0.55rem] px-1.5 py-0.5`}>{item.category}</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <p className="text-[#5B487A] text-[0.75rem] md:text-sm font-medium italic border-l-2 border-[#F2A65A] pl-2">{item.shortDesc}</p>
+
+                                        {item.image && <img src={item.image} alt={item.title} className="w-full h-32 md:h-40 object-cover rounded-lg mt-2" />}
+                                        
+                                        <div className="prose prose-sm text-[#4A4159] max-w-none text-[0.75rem] md:text-sm leading-relaxed mt-2" dangerouslySetInnerHTML={{ __html: item.fullContent }}></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      );
+                    })}
+
+                </div>
+            </div>
+        </div>
+      </section>
+
+      {/* Mountain Divider */}
+      <div className="w-full bg-[#F4EFE6] relative -mb-1 z-20">
+        <svg viewBox="0 0 1440 250" preserveAspectRatio="none" className="w-full h-32 md:h-56 block">
+            <path fill="var(--color-purple)" opacity="0.4" d="M0,250 L0,150 L200,50 L450,180 L700,20 L950,160 L1200,60 L1440,190 L1440,250 Z"></path>
+            <path fill="var(--color-purple)" opacity="0.7" d="M0,250 L0,200 L150,120 L350,220 L600,80 L850,210 L1100,100 L1440,220 L1440,250 Z"></path>
+            <path fill="var(--color-purple)" d="M0,250 L0,220 L250,160 L500,240 L750,120 L1000,230 L1300,150 L1440,240 L1440,250 Z"></path>
+        </svg>
+      </div>
 
       {/* Footer */}
-      <footer className="bg-[#0d1117] border-t border-gray-800 py-10 mt-auto">
-          <div className="container mx-auto px-6 text-center text-gray-500">
-              <div className="flex justify-center space-x-6 mb-6">
-                   <a href="https://www.linkedin.com/in/huzaifah-adam-gmpsss-a2a334183/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors bg-gray-800/50 p-3 rounded-full">
-                    <span className="sr-only">LinkedIn</span>
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                  </a>
-              </div>
-              <p>&copy; 2025 Huzaifah Adam. All Rights Reserved.</p>
-          </div>
+      <footer id="contact" className="bg-[#3B3155] text-[#FDFBF7] pt-12 pb-20 text-center relative overflow-hidden">
+        <div className="relative z-10">
+            <h2 className="text-4xl mb-4 serif-font">Let's Connect</h2>
+            <p className="text-[#F2A65A] mb-10 max-w-md mx-auto font-semibold">Connecting Data, Psychology, and People.</p>
+            
+            <div className="flex flex-col md:flex-row justify-center items-center gap-6 mb-12">
+                <a href="mailto:huzaifah.adam.98@gmail.com" className="flex items-center gap-3 bg-white/5 hover:bg-[#D95C14] border border-white/10 px-8 py-4 rounded-full transition-all backdrop-blur-sm font-medium">
+                    <span className="text-xl">✉️</span> huzaifah.adam.98@gmail.com
+                </a>
+                <span className="flex items-center gap-3 bg-white/5 border border-white/10 px-8 py-4 rounded-full backdrop-blur-sm font-medium">
+                    <span className="text-xl">📞</span> +60(11) 35169351
+                </span>
+            </div>
+            
+            <p className="text-sm text-white/40">© 2026 Huzaifah Adam. All Rights Reserved.</p>
+        </div>
       </footer>
     </div>
   );
