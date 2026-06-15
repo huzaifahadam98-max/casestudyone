@@ -182,7 +182,7 @@ export default function App() {
                                 "I am driven by the intersection of data and human psychology, transforming complex information into clear, actionable strategies that empower organizations and their people."
                             </blockquote>
                             <p className="mt-8 text-lg font-bold text-white">Huzaifah Adam</p>
-                            <p className="text-gray-400">Strategic Performance Analyst, advising on human capital initiatives at Khazanah Nasional Berhad.</p>
+                            <p className="text-gray-400">Strategic Performance Analyst, advising on human capital initiatives.</p>
                         </div>
                     </div>
                 </div>
