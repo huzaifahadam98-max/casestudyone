@@ -250,7 +250,7 @@ export default function App() {
                         <div className="card p-8 rounded-2xl flex flex-col fade-in-up" style={{transitionDelay: '100ms'}}>
                             <div className="flex-grow">
                                 <p className="text-blue-400 font-semibold text-sm tracking-wide">Case Study 2</p>
-                                <h3 className="text-2xl md:text-3xl font-bold text-white mt-3 mb-4 leading-snug">Strategic Leadership Assessment.</h3>
+                                <h3 className="text-2xl md:text-3xl font-bold text-white mt-3 mb-4 leading-snug">Strategic Leadership Assessment (CSFO Job Design).</h3>
                                 <p className="text-gray-400">Architecting the Future for CSFO.</p>
                             </div>
                             <div className="mt-8">
