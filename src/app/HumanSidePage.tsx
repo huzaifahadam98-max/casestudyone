@@ -417,13 +417,9 @@ export default function HumanSidePage({ onSwitchBack }: { onSwitchBack: () => vo
       `}} />
 
       {/* Hero Section */}
-      <header className="hero-section h-screen w-full relative flex flex-col items-center justify-center text-white">
+      <header className="hero-section min-h-[80vh] w-full relative flex flex-col items-center justify-center text-white">
         {/* Navigation */}
-        <nav className="absolute top-0 w-full p-6 md:p-10 flex justify-between items-center z-50">
-          <div className="brand-box text-sm hero-anim serif-font">
-            Huzaifah<br/>Adam
-          </div>
-          
+        <nav className="absolute top-0 w-full p-6 md:p-10 flex justify-end items-center z-50">
           <div className="hero-anim flex items-center gap-3 bg-[#3B3155]/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 shadow-lg">
             <span className="text-[#FDFBF7] text-xs md:text-sm font-semibold tracking-wide">The Human Side</span>
             <button onClick={onSwitchBack} title="Switch back to Data Analytics Portfolio" className="group flex items-center cursor-pointer">
