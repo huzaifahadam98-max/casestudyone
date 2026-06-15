@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Case: Strategic Workforce & Financial Optimization Review</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .slide {
+            display: none;
+            min-height: 550px;
+        }
+        .slide.active {
+            display: flex;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .slide.active > div {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        
+        /* Custom Chart Styles */
+        .chart-area {
+            position: relative;
+            background-image: linear-gradient(to bottom, #e5e7eb 1px, transparent 1px);
+            background-size: 100% 25%;
+        }
+        .bar-vertical {
+            transition: height 1s ease-out;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+        }
+        
+        /* Timeline */
+        .timeline-item {
+            position: relative;
+            padding-left: 2.5rem;
+            padding-bottom: 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 0.5rem;
+            width: 2px;
+            height: 100%;
+            background-color: #E2E8F0;
+        }
+        .timeline-item:last-child::before { display: none; }
+        .timeline-dot {
+            position: absolute;
+            left: -0.05rem;
+            top: 0.25rem;
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 50%;
+            background-color: white;
+            border: 3px solid #4F46E5; /* Indigo 600 */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen p-4">
+
+    <div class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200">
+        
+        <div class="relative">
+            
+            <!-- Slide 1: Title -->
+            <div id="slide1" class="slide active flex-col items-center justify-center text-center p-12 md:p-20 bg-slate-900 text-white">
+                <div>
+                    <div class="inline-block px-4 py-1 rounded-full bg-indigo-500/20 text-indigo-300 font-semibold text-sm mb-6 uppercase tracking-wider">
+                        WTW Case Study
+                    </div>
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">Strategic Workforce &<br>Financial Optimization</h1>
+                    <p class="text-xl md:text-2xl text-slate-400 mb-12 font-light">Targeted Realignment for Organisation X</p>
+                    
+                    <div class="text-left max-w-md mx-auto border-t border-slate-700 pt-8">
+                        <p class="text-md text-slate-300 mb-2"><span class="font-semibold text-white">Analyst:</span> Huzaifah Adam</p>
+                        <p class="text-md text-slate-300"><span class="font-semibold text-white">Date:</span> June 2026</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: Exec Summary -->
+            <div id="slide2" class="slide flex-col justify-start p-10 md:p-14">
+                <div class="w-full h-full flex flex-col">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-2">Executive Summary</h2>
+                    <p class="text-slate-500 mb-10 text-lg">Core operations are stable, but severely dragged by isolated inefficiencies and heavy debt.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 flex-grow">
+                        <!-- Problem -->
+                        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200 shadow-sm">
+                            <div class="w-12 h-12 bg-rose-100 text-rose-600 rounded-lg flex items-center justify-center mb-4">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-3">Artificial Profitability</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">Reported PBT of RM 313M is an illusion, masking dangerously thin core operating profits (RM 58M). Debt servicing consumes an unsustainable 11.3% of revenue.</p>
+                        </div>
+
+                        <!-- Insight -->
+                        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200 shadow-sm">
+                            <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-lg flex items-center justify-center mb-4">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-3">Isolated Misallocation</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">The organization is not bloated generally. The inefficiency is isolated to the Ancillary Unit (Parking), which absorbs 39% of headcount for only 8.4% of revenue.</p>
+                        </div>
+
+                        <!-- Action -->
+                        <div class="bg-indigo-50 rounded-xl p-6 border border-indigo-200 shadow-sm">
+                            <div class="w-12 h-12 bg-indigo-600 text-white rounded-lg flex items-center justify-center mb-4">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-indigo-900 mb-3">Strategic Action</h3>
+                            <p class="text-indigo-800 text-sm leading-relaxed">Automate Ancillary unit to save RM 10M annually (-35% HC). Deploy RM 255M one-off subsidiary gain to retire high-interest principal debt immediately.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Profitability Chart -->
+            <div id="slide3" class="slide flex-col justify-start p-10 md:p-14">
+                <div class="w-full">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-2">Distorted Profitability</h2>
+                    <p class="text-slate-500 mb-10 text-lg">Reported PBIT masks severe core operational weakness.</p>
+                    
+                    <div class="max-w-3xl mx-auto mt-8">
+                        <div class="flex items-end justify-around h-64 chart-area pb-2 border-b-2 border-slate-300">
+                            <!-- Bar 1 -->
+                            <div class="flex flex-col items-center justify-end w-1/4 h-full">
+                                <span class="font-bold text-slate-800 text-xl mb-2">RM 313M</span>
+                                <div class="w-full flex-grow flex items-end">
+                                    <div class="w-full bg-slate-300 bar-vertical shadow-inner" style="height: 100%;"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="text-3xl font-bold text-slate-300 self-end pb-8">=</div>
+
+                            <!-- Bar 2 -->
+                            <div class="flex flex-col items-center justify-end w-1/4 h-full">
+                                <span class="font-bold text-slate-600 text-xl mb-2">RM 255M</span>
+                                <div class="w-full flex-grow flex items-end">
+                                    <div class="w-full bg-slate-400 bar-vertical shadow-inner" style="height: 81%;"></div>
+                                </div>
+                            </div>
+
+                            <div class="text-3xl font-bold text-slate-300 self-end pb-8">+</div>
+
+                            <!-- Bar 3 -->
+                            <div class="flex flex-col items-center justify-end w-1/4 h-full">
+                                <span class="font-bold text-rose-600 text-xl mb-2">RM 58M</span>
+                                <div class="w-full flex-grow flex items-end">
+                                    <div class="w-full bg-rose-500 bar-vertical shadow-md" style="height: 18.5%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-around text-center mt-4">
+                            <div class="w-1/4 text-sm font-semibold text-slate-700">Reported PBIT<br><span class="text-xs font-normal text-slate-500">(The Illusion)</span></div>
+                            <div class="w-12"></div>
+                            <div class="w-1/4 text-sm font-semibold text-slate-700">One-Off Gain<br><span class="text-xs font-normal text-slate-500">(Subsidiary Disposal)</span></div>
+                            <div class="w-12"></div>
+                            <div class="w-1/4 text-sm font-bold text-rose-600">Core Profit<br><span class="text-xs font-normal text-rose-500">(Actual Operations)</span></div>
+                        </div>
+
+                        <div class="mt-10 bg-slate-50 p-4 rounded-lg border-l-4 border-rose-500 text-slate-700">
+                            <strong>Conclusion:</strong> 81% of our "profit" is a non-recurring event. The core business is barely sustaining its heavy operational footprint.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 4: Efficiency Gap -->
+            <div id="slide4" class="slide flex-col justify-start p-10 md:p-14">
+                <div class="w-full">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-2">The Efficiency Gap</h2>
+                    <p class="text-slate-500 mb-10 text-lg">Ancillary operations consume 39% of headcount but drive only 8.4% of revenue.</p>
+                    
+                    <div class="max-w-4xl mx-auto bg-white border border-slate-200 rounded-xl p-8 shadow-sm">
+                        
+                        <!-- Workforce Bar -->
+                        <div class="mb-8">
+                            <div class="flex justify-between items-end mb-2">
+                                <h4 class="font-bold text-slate-700 uppercase tracking-wide text-sm">Workforce Allocation (Headcount)</h4>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-12 flex overflow-hidden shadow-inner">
+                                <div class="bg-indigo-600 flex items-center px-4 text-white font-bold" style="width: 61%">Core (61%)</div>
+                                <div class="bg-rose-500 flex items-center justify-end px-4 text-white font-bold" style="width: 39%">Ancillary (39%)</div>
+                            </div>
+                        </div>
+
+                        <!-- Revenue Bar -->
+                        <div class="mb-6">
+                            <div class="flex justify-between items-end mb-2">
+                                <h4 class="font-bold text-slate-700 uppercase tracking-wide text-sm">Revenue Generation</h4>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-12 flex overflow-hidden shadow-inner">
+                                <div class="bg-indigo-600 flex items-center px-4 text-white font-bold" style="width: 91.6%">Core (RM 1,558M)</div>
+                                <div class="bg-rose-500 flex items-center justify-end px-4 text-white font-bold" style="width: 8.4%">RM 228M</div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 flex items-center bg-indigo-50 p-4 rounded-lg text-indigo-900 border border-indigo-100">
+                            <svg class="w-8 h-8 mr-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <p><strong>Insight:</strong> The Core Operation generates <strong>7x more revenue per employee</strong> than Ancillary. The high Support headcount in Ancillary confirms a reliance on manual, non-scalable labor.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 5: Debt Burden -->
+            <div id="slide5" class="slide flex-col justify-start p-10 md:p-14">
+                <div class="w-full">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-2">Capital Structure: Excessive Debt</h2>
+                    <p class="text-slate-500 mb-10 text-lg">Finance costs consume 11.3% of revenue, severely lagging industry benchmarks.</p>
+                    
+                    <div class="max-w-4xl mx-auto flex flex-col md:flex-row gap-8 items-center">
+                        
+                        <!-- Chart -->
+                        <div class="w-full md:w-3/5 bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+                            <h4 class="text-center font-bold text-slate-600 mb-6 uppercase text-sm tracking-wide">Finance Cost as % of Revenue</h4>
+                            <div class="flex items-end justify-between h-48 border-b-2 border-slate-300 px-4">
+                                <!-- Bars (Height based on max 12%) -->
+                                <div class="flex flex-col items-center justify-end w-1/6 group h-full">
+                                    <span class="text-rose-600 font-bold mb-1">11.3%</span>
+                                    <div class="w-full flex-grow flex items-end">
+                                        <div class="w-full bg-rose-500 bar-vertical rounded-t-sm" style="height: 94%;"></div>
+                                    </div>
+                                    <span class="mt-2 text-sm font-bold text-slate-800">Comp X</span>
+                                </div>
+                                <div class="flex flex-col items-center justify-end w-1/6 h-full">
+                                    <span class="text-slate-500 font-medium mb-1">1.9%</span>
+                                    <div class="w-full flex-grow flex items-end">
+                                        <div class="w-full bg-slate-300 bar-vertical rounded-t-sm" style="height: 16%;"></div>
+                                    </div>
+                                    <span class="mt-2 text-sm text-slate-500">Peer A</span>
+                                </div>
+                                <div class="flex flex-col items-center justify-end w-1/6 h-full">
+                                    <span class="text-slate-500 font-medium mb-1">5.1%</span>
+                                    <div class="w-full flex-grow flex items-end">
+                                        <div class="w-full bg-slate-300 bar-vertical rounded-t-sm" style="height: 42%;"></div>
+                                    </div>
+                                    <span class="mt-2 text-sm text-slate-500">Peer B</span>
+                                </div>
+                                <div class="flex flex-col items-center justify-end w-1/6 h-full">
+                                    <span class="text-slate-500 font-medium mb-1">4.1%</span>
+                                    <div class="w-full flex-grow flex items-end">
+                                        <div class="w-full bg-slate-300 bar-vertical rounded-t-sm" style="height: 34%;"></div>
+                                    </div>
+                                    <span class="mt-2 text-sm text-slate-500">Peer C</span>
+                                </div>
+                                <div class="flex flex-col items-center justify-end w-1/6 h-full">
+                                    <span class="text-slate-500 font-medium mb-1">4.0%</span>
+                                    <div class="w-full flex-grow flex items-end">
+                                        <div class="w-full bg-slate-300 bar-vertical rounded-t-sm" style="height: 33%;"></div>
+                                    </div>
+                                    <span class="mt-2 text-sm text-slate-500">Peer D</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Takeaway -->
+                        <div class="w-full md:w-2/5 flex flex-col gap-4">
+                            <div class="bg-rose-50 border-l-4 border-rose-500 p-5 rounded-r-lg">
+                                <h3 class="text-rose-800 font-bold text-xl mb-1">RM 199 Million</h3>
+                                <p class="text-rose-700 text-sm">Total annual finance cost drag on P&L.</p>
+                            </div>
+                            <div class="bg-slate-50 border border-slate-200 p-5 rounded-lg text-slate-700 text-sm leading-relaxed">
+                                Our debt burden is nearly <strong>3x the industry average (~3.8%)</strong>. Operating efficiency alone cannot solve this; we must restructure the capital stack immediately to prevent total margin erosion.
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6: Three Pillars -->
+            <div id="slide6" class="slide flex-col justify-start p-10 md:p-14 bg-slate-50">
+                <div class="w-full">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-2">Value Creation Strategy</h2>
+                    <p class="text-slate-500 mb-10 text-lg">Three pillars to stabilize the balance sheet and modernize operations.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                        
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-md hover:shadow-lg transition-shadow">
+                            <h3 class="text-xl font-bold text-slate-800 mb-1 border-b pb-3 border-slate-100">1. Ancillary Automation</h3>
+                            <div class="mt-4">
+                                <p class="text-indigo-600 font-black text-2xl mb-1">+RM 9.7M</p>
+                                <p class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-3">Annual OPEX Savings</p>
+                                <p class="text-sm text-slate-600 leading-relaxed">Implement smart parking automation across all 649 Ancillary staff roles. Execute a 50% headcount reduction via VSS to eliminate manual redundancies.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-md hover:shadow-lg transition-shadow">
+                            <h3 class="text-xl font-bold text-slate-800 mb-1 border-b pb-3 border-slate-100">2. Core PMIS Lift</h3>
+                            <div class="mt-4">
+                                <p class="text-indigo-600 font-black text-2xl mb-1">+15%</p>
+                                <p class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-3">Revenue Per Employee</p>
+                                <p class="text-sm text-slate-600 leading-relaxed">Invest in Project Management Info Systems (PMIS). Transition from manual tracking to a digital delivery model in core operations.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-xl border-t-4 border-t-indigo-600 shadow-md hover:shadow-lg transition-shadow">
+                            <h3 class="text-xl font-bold text-slate-800 mb-1 border-b pb-3 border-slate-100">3. De-Leveraging</h3>
+                            <div class="mt-4">
+                                <p class="text-emerald-600 font-black text-2xl mb-1">-RM 60M</p>
+                                <p class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-3">Finance Cost Reduction</p>
+                                <p class="text-sm text-slate-600 leading-relaxed">Utilize the RM 255M proceeds from subsidiary disposal directly toward retiring high-interest principal debt to right-size capital structure.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: Roadmap -->
+            <div id="slide7" class="slide flex-col justify-start p-10 md:p-14">
+                <div class="w-full">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-2">18-Month Execution Roadmap</h2>
+                    <p class="text-slate-500 mb-10 text-lg">A phased approach to restructuring operations and debt.</p>
+                    
+                    <div class="max-w-3xl mx-auto pl-4">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <h3 class="text-xl font-bold text-slate-800">Phase 1: Diagnostic & Pilot <span class="text-indigo-600 font-medium text-sm ml-2">(Months 1-6)</span></h3>
+                            <div class="mt-2 text-slate-600 grid grid-cols-2 gap-4 text-sm">
+                                <div><strong class="text-slate-700">Operations:</strong> Pilot automated gates at 2 key sites. Map manual workflows for PMIS.</div>
+                                <div><strong class="text-slate-700">Finance:</strong> Audit debt portfolio. Halt non-critical borrowing.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <h3 class="text-xl font-bold text-slate-800">Phase 2: Optimize & Restructure <span class="text-indigo-600 font-medium text-sm ml-2">(Months 7-12)</span></h3>
+                            <div class="mt-2 text-slate-600 grid grid-cols-2 gap-4 text-sm">
+                                <div><strong class="text-slate-700">Operations:</strong> Full automation rollout. Execute 50% VSS. PMIS Go-Live.</div>
+                                <div><strong class="text-slate-700">Finance:</strong> Refinance operations debt. Apply RM 255M disposal cash to principal.</div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <h3 class="text-xl font-bold text-slate-800">Phase 3: Steady State <span class="text-indigo-600 font-medium text-sm ml-2">(Months 13-18)</span></h3>
+                            <div class="mt-2 text-slate-600 grid grid-cols-2 gap-4 text-sm">
+                                <div><strong class="text-slate-700">Operations:</strong> Remote monitoring center live. Ancillary staff count stabilized at ~320.</div>
+                                <div><strong class="text-slate-700">Finance:</strong> Finance cost stabilized at <5% of revenue.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8: Governance & Conclusion -->
+            <div id="slide8" class="slide flex-col items-center justify-center text-center p-12 md:p-20 bg-slate-900 text-white">
+                <div class="max-w-3xl">
+                    <h2 class="text-4xl font-bold mb-6">Execution & Governance</h2>
+                    <p class="text-xl text-slate-400 mb-10 font-light">Transformation requires tight integration between capital restructuring and operations.</p>
+                    
+                    <div class="bg-indigo-600/20 border border-indigo-500/30 rounded-xl p-8 mb-10 text-left">
+                        <h3 class="text-2xl font-bold text-white mb-2">Immediate Action: Appoint CSFO</h3>
+                        <p class="text-indigo-200 text-sm mb-4">Chief Strategy & Financial Officer required to bridge HR/Ops and Finance.</p>
+                        <div class="flex gap-4">
+                            <div class="bg-slate-900/50 p-4 rounded-lg flex-1">
+                                <span class="block text-indigo-400 text-xs font-bold uppercase mb-1">KPI 1</span>
+                                <span class="text-white font-medium">RM 10M OPEX Savings realized via Ancillary Automation.</span>
+                            </div>
+                            <div class="bg-slate-900/50 p-4 rounded-lg flex-1">
+                                <span class="block text-indigo-400 text-xs font-bold uppercase mb-1">KPI 2</span>
+                                <span class="text-white font-medium">Reduction of Finance Costs to < 5% of total revenue.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-slate-500 italic">"We are ready to support the design of the new organizational structure and execute the roadmap starting immediately."</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="w-full max-w-5xl mt-6 flex justify-between items-center px-2">
+        <button id="prevBtn" class="flex items-center px-4 py-2 bg-white border border-slate-200 text-slate-700 rounded-lg shadow-sm hover:bg-slate-50 hover:text-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium">
+            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg> Previous
+        </button>
+        
+        <div class="flex space-x-2" id="slide-indicators">
+            <!-- Indicators injected by JS -->
+        </div>
+
+        <button id="nextBtn" class="flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg shadow-sm hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium">
+            Next <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </button>
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const indicatorsContainer = document.getElementById('slide-indicators');
+        const totalSlides = slides.length;
+        let currentSlide = 1;
+
+        // Build indicators
+        for(let i=1; i<=totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.className = `w-2 h-2 rounded-full transition-colors ${i === 1 ? 'bg-indigo-600' : 'bg-slate-300'}`;
+            dot.id = `indicator-${i}`;
+            indicatorsContainer.appendChild(dot);
+        }
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            const newSlide = document.getElementById(`slide${n}`);
+            if (newSlide) {
+                // Force reflow to restart animation
+                void newSlide.offsetWidth; 
+                newSlide.classList.add('active');
+            }
+            updateControls();
+        }
+
+        function updateControls() {
+            // Update buttons
+            prevBtn.disabled = currentSlide === 1;
+            nextBtn.disabled = currentSlide === totalSlides;
+            
+            // Update dots
+            for(let i=1; i<=totalSlides; i++) {
+                const dot = document.getElementById(`indicator-${i}`);
+                if(i === currentSlide) {
+                    dot.classList.remove('bg-slate-300');
+                    dot.classList.add('bg-indigo-600', 'w-4');
+                } else {
+                    dot.classList.remove('bg-indigo-600', 'w-4');
+                    dot.classList.add('bg-slate-300');
+                }
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        showSlide(currentSlide);
+    });
+</script>
+
+</body>
+</html>
