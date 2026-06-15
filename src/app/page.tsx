@@ -334,7 +334,7 @@ export default function App() {
                                     <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Assessment Tool</span>
                                     <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Firebase</span>
                                 </div>
-                                <a href="https://les-huzaifah.web.app/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-semibold text-purple-400 hover:text-purple-300 transition-colors">
+                                <a href="https://kornferry-wannabe.web.app/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-semibold text-purple-400 hover:text-purple-300 transition-colors">
                                   Try the App <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                 </a>
                             </div>
