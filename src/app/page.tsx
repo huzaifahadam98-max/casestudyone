@@ -298,6 +298,48 @@ export default function App() {
                             </div>
                         </div>
                     </div>
+
+                    {/* App Highlights */}
+                    <div className="mt-24 text-center mb-16">
+                        <h2 className="section-title text-sm font-bold tracking-widest uppercase mb-4 fade-in-up">App Portfolio</h2>
+                        <p className="text-3xl md:text-4xl font-bold text-white max-w-2xl mx-auto fade-in-up" style={{transitionDelay: '100ms'}}>Selected apps of my work.</p>
+                    </div>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        {/* App 1 Placeholder */}
+                        <div className="card p-8 rounded-2xl flex flex-col fade-in-up">
+                            <div className="flex-grow">
+                                <p className="text-purple-400 font-semibold text-sm tracking-wide">App 1</p>
+                                <h3 className="text-2xl md:text-3xl font-bold text-white mt-3 mb-4 leading-snug">[Placeholder] Bicycle Hero 3D</h3>
+                                <p className="text-gray-400">An immersive narrative-driven 3D web application experience.</p>
+                            </div>
+                            <div className="mt-8">
+                                <div className="flex flex-wrap gap-2 mb-6">
+                                    <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">React</span>
+                                    <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Three.js</span>
+                                </div>
+                                <a href="#" className="inline-flex items-center font-semibold text-purple-400 hover:text-purple-300 transition-colors cursor-not-allowed opacity-80">
+                                  Coming Soon <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                </a>
+                            </div>
+                        </div>
+                        {/* App 2 Placeholder */}
+                        <div className="card p-8 rounded-2xl flex flex-col fade-in-up" style={{transitionDelay: '100ms'}}>
+                            <div className="flex-grow">
+                                <p className="text-purple-400 font-semibold text-sm tracking-wide">App 2</p>
+                                <h3 className="text-2xl md:text-3xl font-bold text-white mt-3 mb-4 leading-snug">[Placeholder] Future Project</h3>
+                                <p className="text-gray-400">Details about this upcoming interactive application will be added soon.</p>
+                            </div>
+                            <div className="mt-8">
+                                <div className="flex flex-wrap gap-2 mb-6">
+                                    <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Next.js</span>
+                                    <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Tailwind</span>
+                                </div>
+                                <a href="#" className="inline-flex items-center font-semibold text-purple-400 hover:text-purple-300 transition-colors cursor-not-allowed opacity-80">
+                                  Coming Soon <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
