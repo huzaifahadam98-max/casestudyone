@@ -232,7 +232,7 @@ export default function App() {
                         {/* Project 1 */}
                         <div className="card p-8 rounded-2xl flex flex-col fade-in-up">
                             <div className="flex-grow">
-                                <p className="text-blue-400 font-semibold text-sm tracking-wide">Case Study 1</p>
+                                <p className="text-purple-400 font-semibold text-sm tracking-wide">Case Study 1</p>
                                 <h3 className="text-2xl md:text-3xl font-bold text-white mt-3 mb-4 leading-snug">Strategic Workforce & Financial Optimization.</h3>
                                 <p className="text-gray-400">Targeted Realignment for Organisation X.</p>
                             </div>
@@ -241,7 +241,7 @@ export default function App() {
                                     <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Financial Optimization</span>
                                     <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Workforce Strategy</span>
                                 </div>
-                                <a href="/case-study-wtw.html" target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-semibold text-blue-400 hover:text-blue-300 transition-colors">
+                                <a href="/case-study-wtw.html" target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-semibold text-purple-400 hover:text-purple-300 transition-colors">
                                   View Case Study <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                 </a>
                             </div>
@@ -249,7 +249,7 @@ export default function App() {
                         {/* Project 2 */}
                         <div className="card p-8 rounded-2xl flex flex-col fade-in-up" style={{transitionDelay: '100ms'}}>
                             <div className="flex-grow">
-                                <p className="text-blue-400 font-semibold text-sm tracking-wide">Case Study 2</p>
+                                <p className="text-purple-400 font-semibold text-sm tracking-wide">Case Study 2</p>
                                 <h3 className="text-2xl md:text-3xl font-bold text-white mt-3 mb-4 leading-snug">Strategic Leadership Assessment (CSFO Job Design).</h3>
                                 <p className="text-gray-400">Architecting the Future for CSFO.</p>
                             </div>
@@ -258,7 +258,7 @@ export default function App() {
                                     <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Leadership Assessment</span>
                                     <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Executive Search</span>
                                 </div>
-                                <a href="/case-study-assessment.html" target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-semibold text-blue-400 hover:text-blue-300 transition-colors">
+                                <a href="/case-study-assessment.html" target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-semibold text-purple-400 hover:text-purple-300 transition-colors">
                                   View Case Study <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                 </a>
                             </div>
@@ -266,7 +266,7 @@ export default function App() {
                         {/* Project 3 */}
                         <div className="card p-8 rounded-2xl flex flex-col fade-in-up">
                             <div className="flex-grow">
-                                <p className="text-blue-400 font-semibold text-sm tracking-wide">Case Study 3</p>
+                                <p className="text-purple-400 font-semibold text-sm tracking-wide">Case Study 3</p>
                                 <h3 className="text-2xl md:text-3xl font-bold text-white mt-3 mb-4 leading-snug">A Data-Driven Proposal to Increase Program ROI by Shifting Recruitment Focus.</h3>
                                 <p className="text-gray-400">Strategic Review of a Graduate Trainee Program.</p>
                             </div>
@@ -275,7 +275,7 @@ export default function App() {
                                     <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Data Analysis</span>
                                     <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Change Management</span>
                                 </div>
-                                <a href="https://casestudyone-sanitized.pages.dev/Case%20study%201%20(sanitized)" target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-semibold text-blue-400 hover:text-blue-300 transition-colors">
+                                <a href="https://casestudyone-sanitized.pages.dev/Case%20study%201%20(sanitized)" target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-semibold text-purple-400 hover:text-purple-300 transition-colors">
                                   View Case Study <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                 </a>
                             </div>
@@ -283,7 +283,7 @@ export default function App() {
                         {/* Project 4 */}
                         <div className="card p-8 rounded-2xl flex flex-col fade-in-up" style={{transitionDelay: '100ms'}}>
                             <div className="flex-grow">
-                                <p className="text-blue-400 font-semibold text-sm tracking-wide">Case Study 4</p>
+                                <p className="text-purple-400 font-semibold text-sm tracking-wide">Case Study 4</p>
                                 <h3 className="text-2xl md:text-3xl font-bold text-white mt-3 mb-4 leading-snug">Enhancing Success Rates of Locally-Trained Economics Graduates.</h3>
                                 <p className="text-gray-400">Strategic Review at a leading Malaysian GLIC.</p>
                             </div>
@@ -292,7 +292,7 @@ export default function App() {
                                     <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Project Coordination</span>
                                     <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Stakeholder Engagement</span>
                                 </div>
-                                <a href="https://casestudyone-sanitized.pages.dev/Case%20study%202%20(sanitized)" target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-semibold text-blue-400 hover:text-blue-300 transition-colors">
+                                <a href="https://casestudyone-sanitized.pages.dev/Case%20study%202%20(sanitized)" target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-semibold text-purple-400 hover:text-purple-300 transition-colors">
                                   View Case Study <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                 </a>
                             </div>
@@ -300,7 +300,7 @@ export default function App() {
                         {/* Project 5 */}
                         <div className="card p-8 rounded-2xl flex flex-col fade-in-up">
                             <div className="flex-grow">
-                                <p className="text-blue-400 font-semibold text-sm tracking-wide">Case Study 5</p>
+                                <p className="text-purple-400 font-semibold text-sm tracking-wide">Case Study 5</p>
                                 <h3 className="text-2xl md:text-3xl font-bold text-white mt-3 mb-4 leading-snug">A Strategic Overhaul of a Premier Talent Retention Program.</h3>
                                 <p className="text-gray-400">Strategic Review of a Graduate Trainee Program.</p>
                             </div>
@@ -309,7 +309,7 @@ export default function App() {
                                     <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Problem Solving</span>
                                     <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Forward Thinking</span>
                                 </div>
-                                <a href="https://casestudyone-sanitized.pages.dev/Case%20study%203%20(sanitized)" target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-semibold text-blue-400 hover:text-blue-300 transition-colors">
+                                <a href="https://casestudyone-sanitized.pages.dev/Case%20study%203%20(sanitized)" target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-semibold text-purple-400 hover:text-purple-300 transition-colors">
                                   View Case Study <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                 </a>
                             </div>
@@ -317,7 +317,7 @@ export default function App() {
                         {/* Project 6 */}
                         <div className="card p-8 rounded-2xl flex flex-col fade-in-up" style={{transitionDelay: '100ms'}}>
                             <div className="flex-grow">
-                                <p className="text-blue-400 font-semibold text-sm tracking-wide">Case Study 6</p>
+                                <p className="text-purple-400 font-semibold text-sm tracking-wide">Case Study 6</p>
                                 <h3 className="text-2xl md:text-3xl font-bold text-white mt-3 mb-4 leading-snug">Addressing Challenges on Domestic Talent Pipeline.</h3>
                                 <p className="text-gray-400">Strategic Review of a Graduate Trainee Program.</p>
                             </div>
@@ -326,7 +326,7 @@ export default function App() {
                                     <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Diversity</span>
                                     <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Data Analytics</span>
                                 </div>
-                                <a href="https://casestudyone-sanitized.pages.dev/Case%20study%204%20(sanitized)" target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-semibold text-blue-400 hover:text-blue-300 transition-colors">
+                                <a href="https://casestudyone-sanitized.pages.dev/Case%20study%204%20(sanitized)" target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-semibold text-purple-400 hover:text-purple-300 transition-colors">
                                   View Case Study <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                 </a>
                             </div>
