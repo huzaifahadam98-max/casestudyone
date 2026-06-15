@@ -317,25 +317,25 @@ export default function App() {
                                     <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">AI Studio</span>
                                     <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Gemini</span>
                                 </div>
-                                <a href="https://aistudio.google.com/apps/92842f67-c99f-4940-8330-3613cebd6d45?showAssistant=true&showPreview=true" target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-semibold text-purple-400 hover:text-purple-300 transition-colors">
+                                <a href="https://consultant-aptitude-test.web.app/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-semibold text-purple-400 hover:text-purple-300 transition-colors">
                                   Try the App <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                 </a>
                             </div>
                         </div>
-                        {/* App 2 Placeholder */}
+                        {/* App 2: KornFerry Wannabe */}
                         <div className="card p-8 rounded-2xl flex flex-col fade-in-up" style={{transitionDelay: '100ms'}}>
                             <div className="flex-grow">
-                                <p className="text-purple-400 font-semibold text-sm tracking-wide">App 2</p>
-                                <h3 className="text-2xl md:text-3xl font-bold text-white mt-3 mb-4 leading-snug">[Placeholder] Future Project</h3>
-                                <p className="text-gray-400">Details about this upcoming interactive application will be added soon.</p>
+                                <p className="text-purple-400 font-semibold text-sm tracking-wide">Web Application</p>
+                                <h3 className="text-2xl md:text-3xl font-bold text-white mt-3 mb-4 leading-snug">KornFerry Wannabe</h3>
+                                <p className="text-gray-400">An interactive leadership assessment and organizational consulting tool.</p>
                             </div>
                             <div className="mt-8">
                                 <div className="flex flex-wrap gap-2 mb-6">
-                                    <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Next.js</span>
-                                    <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Tailwind</span>
+                                    <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Assessment Tool</span>
+                                    <span className="bg-[#21262d] border border-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">Firebase</span>
                                 </div>
-                                <a href="#" className="inline-flex items-center font-semibold text-purple-400 hover:text-purple-300 transition-colors cursor-not-allowed opacity-80">
-                                  Coming Soon <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                <a href="https://kornferry-wannabe.web.app/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-semibold text-purple-400 hover:text-purple-300 transition-colors">
+                                  Try the App <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                 </a>
                             </div>
                         </div>
