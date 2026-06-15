@@ -419,14 +419,27 @@ export default function HumanSidePage({ onSwitchBack }: { onSwitchBack: () => vo
       {/* Hero Section */}
       <header className="hero-section min-h-[80vh] w-full relative flex flex-col items-center justify-center text-white">
         {/* Navigation */}
-        <nav className="absolute top-0 w-full p-6 md:p-10 flex justify-end items-center z-50">
-          <div className="hero-anim flex items-center gap-3 bg-[#3B3155]/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 shadow-lg">
-            <span className="text-[#FDFBF7] text-xs md:text-sm font-semibold tracking-wide">The Human Side</span>
-            <button onClick={onSwitchBack} title="Switch back to Data Analytics Portfolio" className="group flex items-center cursor-pointer">
-                <div className="w-11 h-6 bg-[#D95C14] rounded-full relative shadow-inner border border-black/10 transition-colors duration-300 group-hover:bg-[#F2A65A]">
-                    <div className="absolute right-1 top-[3px] w-4 h-4 bg-white rounded-full shadow-sm transition-transform duration-300 group-hover:scale-90"></div>
+        <nav className="fixed top-0 left-0 right-0 z-50 bg-[#3B3155]/40 backdrop-blur-md border-b border-white/20">
+          <div className="container mx-auto px-6 py-4">
+            <div className="flex items-center justify-between hero-anim">
+              <div className="text-xl font-bold text-white tracking-wider serif-font">HUZAIFAH ADAM</div>
+              
+              <div className="flex items-center space-x-6">
+                <div className="hidden md:flex items-center space-x-6">
+                  <a href="#about" className="text-[#FDF0E6] hover:text-white transition-colors text-sm font-medium">About</a>
+                  <a href="#journey" className="text-[#FDF0E6] hover:text-white transition-colors text-sm font-medium">Journey</a>
                 </div>
-            </button>
+
+                <div className="flex items-center gap-3 bg-white/10 px-4 py-2 rounded-full border border-white/20 shadow-lg">
+                  <span className="text-[#FDFBF7] text-xs md:text-sm font-semibold tracking-wide">The Human Side</span>
+                  <button onClick={onSwitchBack} title="Switch back to Data Analytics Portfolio" className="group flex items-center cursor-pointer">
+                      <div className="w-11 h-6 bg-[#D95C14] rounded-full relative shadow-inner border border-black/10 transition-colors duration-300 group-hover:bg-[#F2A65A]">
+                          <div className="absolute right-1 top-[3px] w-4 h-4 bg-white rounded-full shadow-sm transition-transform duration-300 group-hover:scale-90"></div>
+                      </div>
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </nav>
 
