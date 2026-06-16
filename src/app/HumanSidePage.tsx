@@ -11,65 +11,28 @@ if (typeof window !== "undefined") {
 
 const journeyData = [
   {
-      id: 'bsn',
-      date: 'Dec 2025 - Present',
-      title: 'Performance Management Executive',
-      organization: 'Bank Simpanan Nasional',
-      category: 'Experience',
+      id: 'personal-pursuits',
+      date: 'Whenever Possible',
+      title: 'Visual Storytelling & The Outdoors',
+      organization: 'Personal Pursuits',
+      category: 'Creative',
+      displayCategory: 'Outdoors & Creative',
       typeClass: 'tag-experience',
-      shortDesc: 'Applying behavioral psychology to organizational performance and fair governance.',
-      image: null,
+      shortDesc: 'Finding the unseen narrative through observation, patience, and a different lens.',
+      image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       fullContent: `
-          <ul class="list-disc pl-4 space-y-2 text-[#4A4159]">
-              <li><strong>Digital Transformation:</strong> Developed and launched the LES 360 digital report by embedding the Korn Ferry framework into an automated reporting system.</li>
-              <li><strong>Workforce Scarcity Analysis:</strong> Built comprehensive dashboards to visualize workforce scarcity, enabling data-driven strategic planning for future hiring needs.</li>
-              <li><strong>Performance Governance:</strong> Led an investigation into performance rating inconsistencies, adjusting governance to ensure appraisal objectivity and fairness.</li>
-          </ul>
-      `
-  },
-  {
-      id: 'khazanah',
-      date: 'Oct 2024 - Sep 2025',
-      title: 'Analyst, Strategic Human Capital',
-      organization: 'Khazanah Nasional Berhad',
-      category: 'Experience',
-      typeClass: 'tag-experience',
-      shortDesc: 'Connecting data points to understand employee well-being and growth.',
-      image: null,
-      fullContent: `
-          <ul class="list-disc pl-4 space-y-2 text-[#4A4159]">
-              <li><strong>People Analytics Dashboard:</strong> Designed a Power BI dashboard processing HRIS data to visualize key metrics in real-time.</li>
-              <li><strong>Global Talent Acquisition:</strong> Screened over 4,000 applicants for the US & UK Global Graduate Recruitment.</li>
-              <li><strong>Community Building in Office:</strong> Spearheaded the Khazanah HR Network Event 2025 to create a platform for HR leaders to share industry best practices.</li>
-          </ul>
-      `
-  },
-  {
-      id: 'professional-speaking',
-      date: 'Ongoing',
-      title: 'Academic Presenter & Speaker',
-      organization: 'Academic Conferences & Forums',
-      category: 'Experience',
-      typeClass: 'tag-experience',
-      shortDesc: 'Sharing psychological insights and research findings with international audiences.',
-      image: null,
-      fullContent: `
-          <p class="text-[#4A4159] leading-relaxed mb-3">
-              Translating complex psychological data into compelling narratives is a core skill in People Analytics. Presenting at these forums hones my ability to communicate strategic insights effectively to diverse stakeholders.
+          <p class="text-[#4A4159] leading-relaxed">
+              Photography is essentially the art of observation—knowing where to look, waiting for the right moment, and capturing a story others might walk past. I apply this exact same lens to people analytics. Whether I am framing a landscape during a hike or analyzing a decade of employee data, the goal is the same: to cut through the noise, identify underlying patterns, and bring the true narrative into focus.
           </p>
-          <ul class="list-disc pl-4 space-y-2 text-[#4A4159]">
-              <li><strong>Speaker, UTM:</strong> Delivered insights at the Psychology Forum at Universiti Teknologi Malaysia.</li>
-              <li><strong>Presenter, Leeds:</strong> Shared research and perspectives at the Leeds Religion Conference in the UK.</li>
-              <li><strong>Presenter, Indonesia:</strong> Presented academic findings at the Psychology Indonesia Conference.</li>
-          </ul>
       `
   },
   {
       id: 'teaching',
-      date: 'Ongoing Initiative',
+      date: '2021-2022',
       title: 'Applied Psychology Educator',
       organization: 'Teaching & Therapy Initiatives',
       category: 'Volunteer',
+      displayCategory: 'Volunteering & Mentorship',
       typeClass: 'tag-volunteer',
       shortDesc: 'Bridging academic psychology with real-world developmental support.',
       image: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
@@ -86,11 +49,12 @@ const journeyData = [
       `
   },
   {
-      id: 'volunteering',
-      date: 'Ongoing Initiative',
+      id: 'grassroots',
+      date: '2024-2026',
       title: 'Grassroots Community Server',
       organization: 'Grassroots Community NGOs',
       category: 'Volunteer',
+      displayCategory: 'Soup Kitchen & Environment',
       typeClass: 'tag-volunteer',
       shortDesc: 'Grounding empathy and understanding systemic human challenges at the grassroots level.',
       image: 'https://images.unsplash.com/photo-1593113565637-51852b666fba?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
@@ -102,40 +66,116 @@ const journeyData = [
               <li><strong>Dapur Jalanan Chowkit:</strong> Regular community feeding and social support.</li>
               <li><strong>Buku Jalanan Chowkit:</strong> Supporting continuous community education.</li>
               <li><strong>KVN Beach Clean-Up:</strong> Environmental conservation advocacy.</li>
-              <li><strong>Hutan Negara (Negros):</strong> Forest conservation and ecological volunteering.</li>
           </ul>
       `
   },
   {
-      id: 'lancaster',
-      date: 'Oct 2022 - Sept 2023',
-      title: 'M.Sc Developmental Psychology',
-      organization: 'Lancaster University',
-      category: 'Education',
-      typeClass: 'tag-education',
-      shortDesc: 'Deep diving into the cognitive mechanisms of human development.',
+      id: 'indigenous-volunteering',
+      date: '2019',
+      title: 'Indigenous Community Volunteer',
+      organization: 'Indigenous Community Volunteering',
+      category: 'Volunteer',
+      displayCategory: 'Cultural Heritage',
+      typeClass: 'tag-volunteer',
+      shortDesc: 'Exploring communal architecture to understand collective identity and shared governance.',
       image: null,
       fullContent: `
-          <p class="mb-2"><strong>Awards:</strong> Received fully funded scholarship from Malaysia Graduate Record Excellence Program (GRE-2022).</p>
-          <p><strong>Core Focus:</strong> Beyond just data analytics, this degree allowed me to deeply understand *why* people behave the way they do, bridging the gap between statistical outputs and actual human emotions.</p>
+          <p class="text-[#4A4159] leading-relaxed mb-3">
+              Engaging with the Dayak community through the Rumah Betang (longhouse) provided a masterclass in organic collaboration. The longhouse architecture is a physical manifestation of inclusivity—where multiple families coexist under one roof through shared responsibility and consensus. This experience refined my approach to organizational culture, demonstrating that a successful collective requires a design that inherently fosters trust, transparency, and a strong sense of shared identity.
+          </p>
+          <ul class="list-disc pl-4 space-y-2 text-[#4A4159]">
+              <li><strong>Rumah Betang Heritage:</strong> Engaging with indigenous communities to understand architectural values.</li>
+              <li><strong>Community Architecture:</strong> Volunteering in initiatives to preserve traditional communal spaces.</li>
+              <li><strong>Cultural Immersion:</strong> Learning local frameworks for collective decision-making and social cohesion.</li>
+          </ul>
       `
   },
   {
-      id: 'outdoors',
-      date: 'Whenever Possible',
-      title: 'Visual Storytelling & The Outdoors',
-      organization: 'Personal Pursuits',
-      category: 'Creative',
-      typeClass: 'tag-experience',
-      shortDesc: 'Finding the unseen narrative through observation, patience, and a different lens.',
-      image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      id: 'orang-asli',
+      date: '2025',
+      title: 'Community Healthcare Volunteer',
+      organization: 'Orang Asli (Bateq) Empowerment',
+      category: 'Volunteer',
+      displayCategory: 'Healthcare & Social Integration',
+      typeClass: 'tag-volunteer',
+      shortDesc: 'Facilitating equitable access to healthcare and civil rights for marginalized indigenous communities.',
+      image: null,
       fullContent: `
-          <p class="text-[#4A4159] leading-relaxed">
-              Photography is essentially the art of observation—knowing where to look, waiting for the right moment, and capturing a story others might walk past. I apply this exact same lens to people analytics. Whether I am framing a landscape during a hike or analyzing a decade of employee data, the goal is the same: to cut through the noise, identify underlying patterns, and bring the true narrative into focus.
+          <p class="text-[#4A4159] leading-relaxed mb-3">
+              Working with the Bateq community highlighted the systemic barriers that limit access to basic human necessities. By addressing immediate health concerns—specifically skin-related conditions—through improved hygiene education, and bridging the administrative gap to help them secure national identification (IC), I witnessed the transformative power of inclusive advocacy. This experience underscored that in both HR and society, sustainable support requires removing bureaucratic hurdles to empower individuals to participate fully in the wider community.
           </p>
+          <ul class="list-disc pl-4 space-y-2 text-[#4A4159]">
+              <li><strong>Healthcare Outreach:</strong> Implementing hygiene-based interventions to manage localized skin conditions.</li>
+              <li><strong>Language Literacy:</strong> Conducting sessions to improve Bahasa Malaysia proficiency for better public interaction.</li>
+              <li><strong>Civil Rights Advocacy:</strong> Collaborating with government agencies to assist community members in obtaining legal identification.</li>
+          </ul>
+      `
+  },
+  {
+      id: 'asean-youth',
+      date: '2020-2021',
+      title: 'Regional Leadership Volunteer',
+      organization: 'ASEAN Youth Volunteering',
+      category: 'Volunteer',
+      displayCategory: 'Regional Leadership',
+      typeClass: 'tag-volunteer',
+      shortDesc: 'Co-designing youth-led grassroots solutions to tackle socioeconomic challenges across Southeast Asia.',
+      image: null,
+      fullContent: `
+          <p class="text-[#4A4159] leading-relaxed mb-3">
+              Participating in the eMpowering Youths Across ASEAN (eYAA) program expanded my perspective on cross-border collaboration. Partnering with regional changemakers and local civil society groups, we utilized grant funding to implement targeted community-driven projects. This experience reinforced how cross-cultural teamwork and structured project management translate regional development strategies into tangible, ground-level civic impact.
+          </p>
+          <ul class="list-disc pl-4 space-y-2 text-[#4A4159]">
+              <li><strong>Regional Leadership:</strong> Completing structured project management and community development training.</li>
+              <li><strong>Cross-Border Collaboration:</strong> Partnering with regional youth leaders to address local development priorities.</li>
+              <li><strong>Community Interventions:</strong> Co-designing sustainable grassroots projects aligned with ASEAN development frameworks.</li>
+          </ul>
+      `
+  },
+  {
+      id: 'academic-speaker',
+      date: 'Ongoing',
+      title: 'Academic Presenter & Speaker',
+      organization: 'Academic Conferences',
+      category: 'Experience',
+      displayCategory: 'Corporate Experience',
+      typeClass: 'tag-experience',
+      shortDesc: 'Sharing psychological insights and research findings with international audiences.',
+      image: null,
+      fullContent: `
+          <p class="text-[#4A4159] leading-relaxed mb-3">
+              Translating complex psychological data into compelling narratives is a core skill in People Analytics. Presenting at these forums hones my ability to communicate strategic insights effectively to diverse stakeholders.
+          </p>
+          <ul class="list-disc pl-4 space-y-2 text-[#4A4159]">
+              <li><strong>Speaker, UTM:</strong> Delivered insights at the Psychology Forum at Universiti Teknologi Malaysia.</li>
+              <li><strong>Presenter, Leeds:</strong> Shared research and perspectives at the Leeds Religion Conference in the UK. 2nd International Conference on Critical Muslim Studies.</li>
+              <li><strong>Presenter, Indonesia:</strong> Presented academic findings at the Psychology Indonesia Conference: The Influence of Mindset on Intellectual Performance.</li>
+          </ul>
+      `
+  },
+  {
+      id: 'social-innovation',
+      date: '2020',
+      title: 'Social Innovation & Tech Development',
+      organization: 'Peluang Kedua App',
+      category: 'Creative',
+      displayCategory: 'Digital Health & Innovation',
+      typeClass: 'tag-experience',
+      shortDesc: 'Developing a digital health application to provide accessible psychological and wellness support.',
+      image: null,
+      fullContent: `
+          <p class="text-[#4A4159] leading-relaxed mb-3">
+              Conceptualizing and developing the Peluang Kedua application allowed me to leverage technology to address critical societal gaps. Designed similarly to global platforms like BetterHelp, the app focused on scaling mental wellness and behavioral health resources for vulnerable populations. The innovation was recognized nationwide, placing in the top 12 nationwide in a major Malaysian innovation program, which validated its potential to drive community-wide psychological resilience.
+          </p>
+          <ul class="list-disc pl-4 space-y-2 text-[#4A4159]">
+              <li><strong>App Architecture:</strong> Conceptualizing a scalable digital platform dedicated to accessible behavioral health support.</li>
+              <li><strong>National Recognition:</strong> Pitching the platform to place within the top 12 innovations in a prestigious Malaysian competition.</li>
+              <li><strong>Social Impact Design:</strong> Aligning technical software solutions with deep-rooted community wellness and psychological needs.</li>
+          </ul>
       `
   }
 ];
+
 
 export default function HumanSidePage({ onSwitchBack }: { onSwitchBack: () => void }) {
   const [filter, setFilter] = useState('All');
@@ -576,7 +616,7 @@ export default function HumanSidePage({ onSwitchBack }: { onSwitchBack: () => vo
                                             <h4 className="text-sm md:text-base font-bold text-[#2A2438]">{item.title}</h4>
                                             <div className="flex flex-wrap items-center gap-2 mt-1.5">
                                                 <span className="text-[#D95C14] font-bold tracking-wide text-[0.65rem] md:text-xs uppercase">{item.date}</span>
-                                                <span className={`category-tag ${item.typeClass} !text-[0.55rem] px-1.5 py-0.5`}>{item.category}</span>
+                                                <span className={`category-tag ${item.typeClass} !text-[0.55rem] px-1.5 py-0.5`}>{item.displayCategory || item.category}</span>
                                             </div>
                                         </div>
                                         
